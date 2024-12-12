@@ -251,7 +251,8 @@ int main() {
             </ul>
         </div>
     </div>
-        <h1 onclick="toggleDetails('tourismDetails')">Efficient Management of Tourism</h1>
+
+    <h1 onclick="toggleDetails('tourismDetails')">Efficient Management of Tourism</h1>
     <div id="tourismDetails" style="display: none;">
         <div class="section">
             <h2>Introduction</h2>
@@ -265,14 +266,16 @@ int main() {
         </div>
         <div class="section">
             <h3>Merge Sort for Tourism Data</h3>
-            <p>Merge sort is particularly effective for handling large datasets of tourism visits due to its efficiency and stability:</p>
-            <ul>
-                <li><strong>Efficiency:</strong> With a time complexity of O(n log n), merge sort is suitable for sorting large datasets.</li>
-                <li><strong>Stability:</strong> It preserves the relative order of equal elements, ensuring consistency.</li>
-                <li><strong>Large Dataset Handling:</strong> It processes data in chunks, making it ideal for datasets that exceed memory limits.</li>
-            </ul>
-            <h4>Code Example</h4>
-            <pre>
+            <h4 onclick="toggleDetails('mergeSortCode')" style="cursor: pointer; color: #007bff;">Click to view Merge Sort Code</h4>
+            <div id="mergeSortCode" style="display: none;">
+                <p>Merge sort is particularly effective for handling large datasets of tourism visits due to its efficiency and stability:</p>
+                <ul>
+                    <li><strong>Efficiency:</strong> With a time complexity of O(n log n), merge sort is suitable for sorting large datasets.</li>
+                    <li><strong>Stability:</strong> It preserves the relative order of equal elements, ensuring consistency.</li>
+                    <li><strong>Large Dataset Handling:</strong> It processes data in chunks, making it ideal for datasets that exceed memory limits.</li>
+                </ul>
+                <h4>Code Example</h4>
+                <pre>
 #include <iostream>
 #include <vector>
 
@@ -335,22 +338,13 @@ int main() {
 
     return 0;
 }
-            </pre>
-        </div>
-        <div class="section">
-            <h3>Advantages and Applications</h3>
-            <ul>
-                <li><strong>Enhanced Resource Allocation:</strong> Helps in directing resources to high-traffic areas.</li>
-                <li><strong>Improved Visitor Experience:</strong> Reduces overcrowding and enhances tourist satisfaction.</li>
-                <li><strong>Data-Driven Decision Making:</strong> Facilitates informed city planning and marketing strategies.</li>
-            </ul>
+                </pre>
+            </div>
         </div>
     </div>
 
-   
+    <footer>
+        <p>&copy; 2024 Tourism and Traffic Management - All Rights Reserved</p>
+    </footer>
 </body>
 </html>
-
-    <footer>
-        <p><strong>Smart Solutions | Powered by Innovation and Preparedness</strong></p>
-    </footer>
