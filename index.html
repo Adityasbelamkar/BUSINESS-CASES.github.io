@@ -14,6 +14,13 @@
         }
         h1 {
             color: #2c3e50;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #details {
+            display: none;
+            margin-top: 20px;
         }
         h2 {
             color: #34495e;
@@ -26,31 +33,40 @@
             margin-left: 20px;
         }
     </style>
+    <script>
+        function toggleDetails() {
+            const details = document.getElementById('details');
+            details.style.display = details.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
 </head>
 <body>
-    <h1>Smart Traffic Management Using Kruskal’s Algorithm</h1>
-    <p>Smart Traffic Management refers to the use of advanced technologies and algorithms to optimize the flow of traffic, reduce congestion, and improve road safety in urban areas. This can be achieved through real-time data analysis, adaptive traffic signal systems, and efficient route planning.</p>
+    <h1 onclick="toggleDetails()">Smart Traffic Management System</h1>
+    <div id="details">
+        <h2>Smart Traffic Management Using Kruskal’s Algorithm</h2>
+        <p>Smart Traffic Management refers to the use of advanced technologies and algorithms to optimize the flow of traffic, reduce congestion, and improve road safety in urban areas. This can be achieved through real-time data analysis, adaptive traffic signal systems, and efficient route planning.</p>
 
-    <h2>Using Kruskal's Algorithm</h2>
-    <h3>Graph Representation</h3>
-    <p>The city's traffic network is modeled as a graph, with intersections as nodes and roads as edges. Each edge is weighted based on traffic factors like travel time or congestion.</p>
+        <h3>Using Kruskal's Algorithm</h3>
+        <h4>Graph Representation</h4>
+        <p>The city's traffic network is modeled as a graph, with intersections as nodes and roads as edges. Each edge is weighted based on traffic factors like travel time or congestion.</p>
 
-    <h3>Kruskal’s Algorithm</h3>
-    <p>The algorithm is applied to find the Minimum Spanning Tree (MST) of the traffic network, connecting all key intersections with the minimum total weight (e.g., minimal congestion or travel time).</p>
+        <h4>Kruskal’s Algorithm</h4>
+        <p>The algorithm is applied to find the Minimum Spanning Tree (MST) of the traffic network, connecting all key intersections with the minimum total weight (e.g., minimal congestion or travel time).</p>
 
-    <h3>Optimization</h3>
-    <p>By selecting the least costly paths (in terms of time or congestion), Kruskal's algorithm ensures optimal routing and traffic flow across the city.</p>
+        <h4>Optimization</h4>
+        <p>By selecting the least costly paths (in terms of time or congestion), Kruskal's algorithm ensures optimal routing and traffic flow across the city.</p>
 
-    <h2>Advantages</h2>
-    <ul>
-        <li><strong>Cost Efficiency:</strong> Minimizes overall travel time and congestion, reducing fuel consumption and operational costs.</li>
-        <li><strong>Improved Traffic Flow:</strong> By optimizing the network, it helps reduce bottlenecks and ensures smoother traffic movement.</li>
-        <li><strong>Scalability:</strong> Can be applied to both small and large cities, optimizing traffic networks efficiently as the city grows.</li>
-        <li><strong>Simple Implementation:</strong> Kruskal's algorithm is straightforward, making it easy to implement in existing traffic management systems.</li>
-    </ul>
+        <h3>Advantages</h3>
+        <ul>
+            <li><strong>Cost Efficiency:</strong> Minimizes overall travel time and congestion, reducing fuel consumption and operational costs.</li>
+            <li><strong>Improved Traffic Flow:</strong> By optimizing the network, it helps reduce bottlenecks and ensures smoother traffic movement.</li>
+            <li><strong>Scalability:</strong> Can be applied to both small and large cities, optimizing traffic networks efficiently as the city grows.</li>
+            <li><strong>Simple Implementation:</strong> Kruskal's algorithm is straightforward, making it easy to implement in existing traffic management systems.</li>
+        </ul>
 
-    <footer>
-        <p><strong>Smart Traffic Management | Powered by Kruskal’s Algorithm</strong></p>
-    </footer>
+        <footer>
+            <p><strong>Smart Traffic Management | Powered by Kruskal’s Algorithm</strong></p>
+        </footer>
+    </div>
 </body>
 </html>
