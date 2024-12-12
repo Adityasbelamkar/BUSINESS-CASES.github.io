@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Traffic Management Using Kruskal's Algorithm</title>
+    <title>Smart Traffic Management System</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,21 +16,40 @@
             color: #2c3e50;
             cursor: pointer;
             text-align: center;
-            margin-top: 100px;
+            margin-top: 50px;
+        }
+        h2, h3 {
+            color: #34495e;
+        }
+        #instructions {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            background: #eaf2f8;
+            padding: 10px;
+            border: 1px solid #d6dbdf;
+            border-radius: 5px;
         }
         #details {
             display: none;
             margin-top: 20px;
         }
-        h2 {
-            color: #34495e;
-        }
-        p, li {
-            margin-bottom: 10px;
+        .section {
+            background: #ffffff;
+            border: 1px solid #d6dbdf;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         ul {
             list-style-type: disc;
             margin-left: 20px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9em;
         }
     </style>
     <script>
@@ -42,30 +61,42 @@
 </head>
 <body>
     <h1 onclick="toggleDetails()">Smart Traffic Management System</h1>
+    <div id="instructions">
+        <p>Click on the title above to view details about the Smart Traffic Management System, including examples, advantages, and more.</p>
+    </div>
     <div id="details">
-        <h2>Smart Traffic Management Using Kruskal’s Algorithm</h2>
-        <p>Smart Traffic Management refers to the use of advanced technologies and algorithms to optimize the flow of traffic, reduce congestion, and improve road safety in urban areas. This can be achieved through real-time data analysis, adaptive traffic signal systems, and efficient route planning.</p>
-
-        <h3>Using Kruskal's Algorithm</h3>
-        <h4>Graph Representation</h4>
-        <p>The city's traffic network is modeled as a graph, with intersections as nodes and roads as edges. Each edge is weighted based on traffic factors like travel time or congestion.</p>
-
-        <h4>Kruskal’s Algorithm</h4>
-        <p>The algorithm is applied to find the Minimum Spanning Tree (MST) of the traffic network, connecting all key intersections with the minimum total weight (e.g., minimal congestion or travel time).</p>
-
-        <h4>Optimization</h4>
-        <p>By selecting the least costly paths (in terms of time or congestion), Kruskal's algorithm ensures optimal routing and traffic flow across the city.</p>
-
-        <h3>Advantages</h3>
-        <ul>
-            <li><strong>Cost Efficiency:</strong> Minimizes overall travel time and congestion, reducing fuel consumption and operational costs.</li>
-            <li><strong>Improved Traffic Flow:</strong> By optimizing the network, it helps reduce bottlenecks and ensures smoother traffic movement.</li>
-            <li><strong>Scalability:</strong> Can be applied to both small and large cities, optimizing traffic networks efficiently as the city grows.</li>
-            <li><strong>Simple Implementation:</strong> Kruskal's algorithm is straightforward, making it easy to implement in existing traffic management systems.</li>
-        </ul>
-
+        <div class="section">
+            <h2>Smart Traffic Management Systems</h2>
+            <p>Target 11.7: Provide Access to Safe and Inclusive Green and Public Spaces</p>
+            <p><strong>Target:</strong> By 2030, provide universal access to safe, inclusive, and accessible, green and public spaces, particularly for women and children, older persons, and persons with disabilities.</p>
+        </div>
+        <div class="section">
+            <h3>Indicators</h3>
+            <ul>
+                <li><strong>Indicator 11.7.1:</strong> Average share of the built-up area of cities that is open space for public use for all, by sex, age, and persons with disabilities.</li>
+                <li><strong>Indicator 11.7.2:</strong> Proportion of persons victimized by physical or sexual harassment, by sex, age, disability status, and place of occurrence, in the previous 12 months.</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Examples</h3>
+            <p>Smart Traffic Management can include:</p>
+            <ul>
+                <li>Adaptive traffic signal systems that respond to real-time congestion.</li>
+                <li>Integration of green corridors to reduce pollution and enhance public spaces.</li>
+                <li>Advanced route planning for emergency and public transport vehicles.</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Advantages</h3>
+            <ul>
+                <li><strong>Cost Efficiency:</strong> Reduces fuel consumption and operational costs by minimizing congestion.</li>
+                <li><strong>Improved Traffic Flow:</strong> Decreases bottlenecks and enhances movement across the network.</li>
+                <li><strong>Scalability:</strong> Effective in both small and large cities, adapting as urban areas grow.</li>
+                <li><strong>Safety:</strong> Enhances road safety and reduces accidents through optimized systems.</li>
+            </ul>
+        </div>
         <footer>
-            <p><strong>Smart Traffic Management | Powered by Kruskal’s Algorithm</strong></p>
+            <p><strong>Smart Traffic Management | Powered by Innovation and Technology</strong></p>
         </footer>
     </div>
 </body>
