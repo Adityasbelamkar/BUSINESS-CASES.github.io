@@ -251,6 +251,107 @@ int main() {
             </ul>
         </div>
     </div>
+        <h1 onclick="toggleDetails('tourismDetails')">Efficient Management of Tourism</h1>
+    <div id="tourismDetails" style="display: none;">
+        <div class="section">
+            <h2>Introduction</h2>
+            <p>Tourism is a critical driver of economic growth, cultural exchange, and urban development in modern cities. By focusing on innovation, sustainability, and inclusivity, cities can design tourism systems that not only attract visitors but also enrich the lives of residents and support long-term economic growth.</p>
+        </div>
+        <div class="section">
+            <h3>Steps for Managing Tourism</h3>
+            <h4>Identifying Popular Tourism Spots</h4>
+            <p><strong>Problem:</strong> Identifying the most visited tourist spots in a city is crucial for effective resource allocation and planning.</p>
+            <p><strong>Solution:</strong> Sorting these spots based on the number of visits helps optimize infrastructure, manage crowds, and prioritize promotional efforts.</p>
+        </div>
+        <div class="section">
+            <h3>Merge Sort for Tourism Data</h3>
+            <p>Merge sort is particularly effective for handling large datasets of tourism visits due to its efficiency and stability:</p>
+            <ul>
+                <li><strong>Efficiency:</strong> With a time complexity of O(n log n), merge sort is suitable for sorting large datasets.</li>
+                <li><strong>Stability:</strong> It preserves the relative order of equal elements, ensuring consistency.</li>
+                <li><strong>Large Dataset Handling:</strong> It processes data in chunks, making it ideal for datasets that exceed memory limits.</li>
+            </ul>
+            <h4>Code Example</h4>
+            <pre>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void Merge(const vector<int> &B, const vector<int> &C, vector<int> &A) {
+    int p = B.size();
+    int q = C.size();
+    int i = 0, j = 0, k = 0;
+
+    while (i < p && j < q) {
+        if (B[i] <= C[j]) {
+            A[k++] = B[i++];
+        } else {
+            A[k++] = C[j++];
+        }
+    }
+
+    while (i < p) {
+        A[k++] = B[i++];
+    }
+
+    while (j < q) {
+        A[k++] = C[j++];
+    }
+}
+
+void MergeSort(vector<int> &A) {
+    int n = A.size();
+
+    if (n <= 1) {
+        return;
+    }
+
+    int mid = n / 2;
+    vector<int> B(A.begin(), A.begin() + mid);
+    vector<int> C(A.begin() + mid, A.end());
+
+    MergeSort(B);
+    MergeSort(C);
+    Merge(B, C, A);
+}
+
+int main() {
+    vector<int> A = {38, 27, 43, 3, 9, 82, 10};
+
+    cout << "Original Array: ";
+    for (int num : A) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    MergeSort(A);
+
+    cout << "Sorted Array: ";
+    for (int num : A) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+            </pre>
+        </div>
+        <div class="section">
+            <h3>Advantages and Applications</h3>
+            <ul>
+                <li><strong>Enhanced Resource Allocation:</strong> Helps in directing resources to high-traffic areas.</li>
+                <li><strong>Improved Visitor Experience:</strong> Reduces overcrowding and enhances tourist satisfaction.</li>
+                <li><strong>Data-Driven Decision Making:</strong> Facilitates informed city planning and marketing strategies.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p><strong>Efficient Tourism Management | Powered by Data and Innovation</strong></p>
+    </footer>
+</body>
+</html>
 
     <footer>
         <p><strong>Smart Solutions | Powered by Innovation and Preparedness</strong></p>
