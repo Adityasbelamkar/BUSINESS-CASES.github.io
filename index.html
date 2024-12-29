@@ -668,7 +668,6 @@ int main() {
 
         <h3>AVL Tree</h3>
         <p><strong>Purpose:</strong> Maintaining a balanced dataset for disaster-related information like shelter availability or hospital capacity.</p>
-        <p><strong>Purpose:</strong> Maintaining balanced data for rapid retrieval and updates, such as resource availability or emergency contacts.</p>
         <p><strong>Real-world Example:</strong> AVL trees can be used in emergency hotlines to keep call queues balanced and ensure timely responses.</p>
         <button class="collapsible">Show AVL Tree Code</button>
         <div class="content">
@@ -764,8 +763,6 @@ int main() {
 
         <h3>Sorting Techniques</h3>
         <p><strong>Purpose:</strong> Efficiently sorting disaster-related data for prioritization, such as ranking affected areas by severity or organizing resources for distribution.</p>
-        <p><strong>Purpose:</strong> Sorting emergency response priorities or resource allocation lists efficiently.</p>
-        <p><strong>Real-world Example:</strong> Sorting can prioritize rescue operations based on the severity of affected areas, ensuring critical regions are attended to first.</p>
         <button class="collapsible">Show Sorting Techniques Code</button>
         <div class="content">
             <pre>
@@ -810,11 +807,9 @@ int main() {
 }
             </pre>
         </div>
+
         <h3>Skip List</h3>
         <p><strong>Purpose:</strong> Efficient searching and updating of real-time disaster data, such as the status of roadblocks, shelters, or hospital capacities.</p>
-        <p><strong>Application:</strong> A skip list can be used for fast searching and updating of information regarding the current state of different locations in the city. It provides logarithmic time complexity for search, insertion, and deletion operations, making it suitable for dynamic environments like disaster response scenarios where data is constantly changing.</p>
-        <p><strong>Real-Time Data Example:</strong> Real-time updates about road closures, shelter availability, or hospital capacity can be stored and managed in a skip list. This allows decision-makers to quickly find the nearest available shelter or the most accessible route to a hospital.</p>
-        <p><strong>Example:</strong> During an evacuation due to a wildfire, a skip list can manage real-time updates on road conditions and shelter availability, allowing the authorities to quickly direct evacuees to the nearest available safe location.</p>
         <button class="collapsible">Show Skip List Code</button>
         <div class="content">
             <pre>
@@ -881,12 +876,13 @@ public:
     }
 
     void displayList() {
+        cout << "\nSkip List:\n";
         for (int i = 0; i <= level; i++) {
-            Node *node = header->forward[i];
+            Node *current = header->forward[i];
             cout << "Level " << i << ": ";
-            while (node != nullptr) {
-                cout << node->key << " ";
-                node = node->forward[i];
+            while (current != nullptr) {
+                cout << current->key << " ";
+                current = current->forward[i];
             }
             cout << endl;
         }
@@ -894,7 +890,7 @@ public:
 };
 
 int main() {
-    srand((unsigned)time(0));
+    srand(time(0));
     SkipList list(3, 0.5);
     list.insertElement(3);
     list.insertElement(6);
@@ -902,13 +898,12 @@ int main() {
     list.insertElement(9);
     list.insertElement(12);
     list.insertElement(19);
-    list.insertElement(17);
-    cout << "Skip List Elements: " << endl;
     list.displayList();
     return 0;
 }
             </pre>
         </div>
+           
    <h3>Breadth-First Search (BFS)</h3>
         <p><strong>Purpose:</strong> Identifying and reaching safe zones (e.g., shelters or evacuation points) in the shortest time possible.</p>
         <p><strong>Application:</strong> BFS can be used to explore the graph layer by layer, starting from a source (e.g., an evacuation point) and finding the shortest paths to various destinations (e.g., safe zones). BFS is ideal for scenarios where the goal is to reach a target in the least number of steps, making it particularly useful for evacuation routing and search operations.</p>
@@ -1111,7 +1106,7 @@ int main() {
             });
         });
     </script>
-
+                 </pre>
         </div>
     </div>
 
