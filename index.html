@@ -580,7 +580,7 @@ int main() {
                 <li><strong>Indicator 11.5.2:</strong> Direct economic loss attributed to disasters in relation to global domestic product (GDP).</li>
             </ul>
         </div>
-       <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -619,29 +619,24 @@ int main() {
     </style>
 </head>
 <body>
-    <p>This case study examines various algorithms and data structures used to address challenges arising from natural disasters in cities. By applying concepts like trees, skip lists, edges, nodes, and sorting techniques, we can create more effective strategies for disaster preparedness, response, and recovery.</p>
+    <h1>Impact of Natural Disasters on Cities: Case Study</h1>
+    <p>This case study examines various algorithms and data structures used to address challenges arising from natural disasters in cities. By applying concepts like AVL trees, sorting techniques, edges, nodes, and skip lists, we can create more effective strategies for disaster preparedness, response, and recovery.</p>
 
     <div class="section">
         <h2>Algorithms for Disaster Management</h2>
         <p>Various algorithms are used to solve different aspects of disaster management, such as evacuation planning, resource distribution, and damage assessment. Below are the algorithms and data structures used in the case study:</p>
 
-        <h3>Dijkstra’s Algorithm</h3>
-        <p><strong>Purpose:</strong> Finding the shortest and safest routes for evacuation or resource delivery in a disaster-stricken city.</p>
-        <p><strong>Application:</strong> Dijkstra’s algorithm is used for optimal routing during evacuations or for distributing resources to critical locations, like hospitals or shelters, by evaluating road conditions in real-time. This algorithm is ideal for routing evacuation or relief efforts, especially in situations where certain routes may be blocked or dangerous due to the disaster.</p>
-        <p><strong>Real-Time Data Example:</strong> Use real-time traffic data (e.g., GPS data from vehicles) and disaster-specific conditions (e.g., blocked roads, structural damages) to dynamically update the graph and find the best evacuation routes.</p>
-        <p><strong>Example:</strong> During Hurricane Katrina (2005), Dijkstra’s algorithm could be applied to find the optimal evacuation routes for residents based on real-time roadblock data, prioritizing fast and safe escape paths.</p>
+        <h3>AVL Tree</h3>
+        <p><strong>Purpose:</strong> Maintaining a balanced dataset for disaster-related information like shelter availability or hospital capacity.</p>
+        <p><strong>Application:</strong> The AVL tree can be used to organize and query large datasets related to disaster scenarios efficiently. Its self-balancing property ensures logarithmic time complexity for insertion, deletion, and search operations, making it ideal for dynamic disaster environments.</p>
+        <p><strong>Real-Time Data Example:</strong> Storing information about shelters and hospital capacities, with updates about availability or capacity changes being automatically balanced within the tree structure.</p>
+        <p><strong>Example:</strong> During a hurricane, AVL trees can manage a database of shelters, allowing authorities to quickly find the nearest shelter with available capacity.</p>
 
-        <h3>Kruskal’s Algorithm (Minimum Spanning Tree)</h3>
-        <p><strong>Purpose:</strong> Ensuring that resources like water, food, and medical supplies reach all affected areas while minimizing travel time.</p>
-        <p><strong>Application:</strong> Use Kruskal’s algorithm to construct a minimum spanning tree (MST) that connects all critical locations in a city (e.g., hospitals, shelters, food depots) using the shortest possible routes. This algorithm is efficient for distributing resources across a network and minimizing the total distance or cost. It is ideal for scenarios where resources need to be delivered across a network in a cost-effective manner.</p>
-        <p><strong>Real-Time Data Example:</strong> Use infrastructure data, such as road lengths, travel times, and road condition information, to create the graph where Kruskal’s algorithm can help determine the minimum path for resource distribution.</p>
-        <p><strong>Example:</strong> In the aftermath of a disaster like an earthquake, Kruskal’s algorithm can be used to connect emergency services to various shelters, hospitals, and resource depots, ensuring that the relief operation uses the least amount of travel time or resources.</p>
-
-        <h3>Prim’s Algorithm (Minimum Spanning Tree)</h3>
-        <p><strong>Purpose:</strong> Optimizing connections between critical infrastructure nodes like power plants, hospitals, and water distribution systems.</p>
-        <p><strong>Application:</strong> Prim’s algorithm works similarly to Kruskal's but is more efficient in terms of constructing the minimum spanning tree from a starting node. It’s ideal for optimizing connections between key infrastructure nodes in the city (e.g., power stations, hospitals, water treatment facilities). It’s particularly effective in dense networks where you need to minimize the number of connections while ensuring all nodes are connected.</p>
-        <p><strong>Real-Time Data Example:</strong> Data about infrastructure damage, fuel levels, and roadblock conditions can be used to adapt the algorithm and ensure that vital services are connected and operational as soon as possible.</p>
-        <p><strong>Example:</strong> After a natural disaster like a flood or earthquake, Prim’s algorithm can help restore the most essential connections first (e.g., linking power plants to hospitals and water stations) to prioritize recovery.</p>
+        <h3>Sorting Techniques</h3>
+        <p><strong>Purpose:</strong> Efficiently sorting disaster-related data for prioritization, such as ranking affected areas by severity or organizing resources for distribution.</p>
+        <p><strong>Application:</strong> Sorting techniques like QuickSort or MergeSort can organize data based on key metrics, such as severity of impact, proximity to resources, or urgency of response. Efficient sorting helps decision-makers prioritize their actions in a logical order.</p>
+        <p><strong>Real-Time Data Example:</strong> Sorting regions based on the level of damage or sorting relief resources by availability and type (e.g., medical supplies, food).</p>
+        <p><strong>Example:</strong> After an earthquake, sorting techniques can prioritize areas with the highest reported damage for immediate rescue and relief operations.</p>
 
         <h3>Skip List</h3>
         <p><strong>Purpose:</strong> Efficient searching and updating of real-time disaster data, such as the status of roadblocks, shelters, or hospital capacities.</p>
@@ -683,22 +678,16 @@ int main() {
             </thead>
             <tbody>
                 <tr>
-                    <td>Dijkstra’s Algorithm</td>
-                    <td>Shortest route planning for evacuation</td>
-                    <td>Finding the shortest path for evacuation and relief distribution</td>
-                    <td>Real-time traffic and road conditions, disaster-specific roadblocks</td>
+                    <td>AVL Tree</td>
+                    <td>Maintaining balanced disaster-related data</td>
+                    <td>Efficiently querying shelter or hospital availability</td>
+                    <td>Real-time shelter and hospital capacity updates</td>
                 </tr>
                 <tr>
-                    <td>Kruskal’s Algorithm</td>
-                    <td>Resource distribution (minimum spanning tree)</td>
-                    <td>Connecting critical infrastructure nodes for resource delivery</td>
-                    <td>Road lengths, travel times, infrastructure damage</td>
-                </tr>
-                <tr>
-                    <td>Prim’s Algorithm</td>
-                    <td>Optimizing infrastructure connections</td>
-                    <td>Connecting hospitals, power plants, water stations in disaster recovery</td>
-                    <td>Infrastructure damage, roadblock data</td>
+                    <td>Sorting Techniques</td>
+                    <td>Prioritizing disaster-affected areas</td>
+                    <td>Ranking regions by severity of impact</td>
+                    <td>Data on severity, proximity, urgency</td>
                 </tr>
                 <tr>
                     <td>Skip List</td>
@@ -730,10 +719,11 @@ int main() {
 
     <div class="section">
         <h2>Best and Most Accurate Algorithm</h2>
-        <p><strong>For routing and evacuation:</strong> Dijkstra’s algorithm is ideal because it guarantees the shortest path even in complex, dynamically changing environments.</p>
-        <p><strong>For resource optimization:</strong> Both Kruskal’s and Prim’s algorithms are accurate for distributing resources efficiently across a network, but Prim’s algorithm is often preferred for its efficiency in dense graphs.</p>
+        <p><strong>For maintaining dynamic data:</strong> AVL trees are ideal due to their balanced structure and efficient query capabilities.</p>
+        <p><strong>For prioritization tasks:</strong> Sorting techniques provide reliable methods for ranking and organizing disaster-related data.</p>
         <p><strong>For data updates and search:</strong> Skip lists provide fast searching and real-time updates, ensuring efficiency in a rapidly changing disaster environment.</p>
     </div>
+
         </div>
     </div>
 
