@@ -452,27 +452,7 @@
     <h1 onclick="toggleDetails('tourismDetails')">Efficient Management of Tourism</h1>
     <div id="tourismDetails" style="display: none;">
         <div class="section">
-            <h2>Introduction</h2>
-            <p>Tourism is a critical driver of economic growth, cultural exchange, and urban development in modern cities. By focusing on innovation, sustainability, and inclusivity, cities can design tourism systems that not only attract visitors but also enrich the lives of residents and support long-term economic growth.</p>
-        </div>
-        <div class="content">
-        <h2>SDG 11.4: Protecting and Safeguarding Cultural and Natural Heritage</h2>
-        <p><strong>Efficient tourism management aligns with SDG 11.4 by ensuring:</strong></p>
-        <ul>
-            <li>Sustainable use of natural and cultural resources.</li>
-            <li>Reduction of overcrowding and degradation of cultural sites.</li>
-            <li>Utilization of technology to monitor and manage visitor impacts on destinations.</li>
-        </ul>
-
-        <h3>Relevant Indicators from UNSDG 11:</h3>
-        <ul>
-            <li><strong>11.4.1</strong> - Total expenditure for conservation and protection of cultural and natural heritage as a percentage of total tourism expenditure.</li>
-            <li><strong>11.4.2</strong> - Proportion of cultural and natural heritage sites that are managed using sustainable practices.</li>
-            <li><strong>11.4.3</strong> - The number of sites included in the World Heritage list, and the status of the conservation efforts on those sites.</li>
-        </ul>
-    </div>
- 
-<!DOCTYPE html>
+            <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -528,9 +508,23 @@
         h4:hover {
             color: #3498db;
         }
+        .code-viewing-section {
+            margin-top: 40px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .code-viewing-section h3 {
+            color: #2980b9;
+        }
     </style>
 </head>
 <body>
+
+    <div class="content">
+        <p><strong>Introduction:</strong><br>Tourism is a key driver of economic growth, cultural exchange, and urban development in cities. Efficient management of tourist infrastructure and resources can enhance the visitor experience while supporting sustainable growth. By leveraging advanced algorithms, cities can optimize operations, minimize congestion, and predict trends.</p>
+    </div>
 
     <div class="content">
         <h2>Steps for Managing Tourism</h2>
@@ -684,9 +678,17 @@ bfs(touristSpots, "Central Plaza"); // Start BFS from Central Plaza
 
     </div>
 
-    <div class="content">
-        <h2>Conclusion</h2>
-        <p>By employing algorithms such as <strong>Merge Sort</strong> for ranking, <strong>Floyd-Warshall</strong> for route optimization, <strong>Dijkstra's Algorithm</strong> for predicting visitor trends, and <strong>Breadth-First Search (BFS)</strong> for dynamic pricing, cities can design smarter tourism systems. These data-driven approaches enhance efficiency, support sustainability, and improve the visitor experience, all while aligning with global goals like <strong>SDG 11.4</strong> to protect and safeguard cultural and natural heritage.</p>
+    <!-- Separate Code Viewing Section -->
+    <div class="code-viewing-section">
+        <h3>Code Viewing Section</h3>
+        <p>Click below to view the code for different algorithms:</p>
+        <ul>
+            <li><button onclick="toggleCode('mergeSortCode')">View Merge Sort Code</button></li>
+            <li><button onclick="toggleCode('floydWarshallCode')">View Floyd-Warshall Code</button></li>
+            <li><button onclick="toggleCode('dijkstraCode')">View Dijkstra's Algorithm Code</button></li>
+            <li><button onclick="toggleCode('bellmanFordCode')">View Bellman-Ford Code</button></li>
+            <li><button onclick="toggleCode('bfsCode')">View BFS Code</button></li>
+        </ul>
     </div>
 
     <script>
