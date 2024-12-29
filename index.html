@@ -1167,6 +1167,89 @@ function toggleCode(codeId) {
         </div>
     </div>
 
+
+                <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7f6;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    h2, h3, h4 {
+        color: #4CAF50;
+    }
+
+    .section {
+        background-color: #ffffff;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .content {
+        background-color: #ffffff;
+        margin: 20px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h3 {
+        color: #00796b;
+        font-weight: bold;
+    }
+
+    .algorithm-section {
+        background-color: #f0f8ff;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .algorithm-section pre {
+        background-color: #282c34;
+        color: white;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 1em;
+        overflow-x: auto;
+    }
+
+    .button {
+        background-color: #00796b;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .button:hover {
+        background-color: #004d40;
+    }
+
+    #mergeSortCode, #floydWarshallCode, #dijkstraCode, #bellmanFordCode, #bfsCode {
+        display: none;
+    }
+
+    ul {
+        list-style-type: square;
+        margin-left: 20px;
+    }
+</style>
     <h1 onclick="toggleDetails('tourismDetails')">Efficient Management of Tourism</h1>
     <div id="tourismDetails" style="display: none;">
         <div class="section">
