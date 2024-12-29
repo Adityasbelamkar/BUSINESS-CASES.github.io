@@ -107,117 +107,179 @@
                 <li><strong>Safety:</strong> Enhances road safety and reduces accidents through optimized systems.</li>
             </ul>
         </div>
-        <div class="section">
-            <h3>Kruskal's Algorithm in Traffic Management</h3>
-            <p>The city's traffic network is modeled as a graph, with intersections as nodes and roads as edges. Each edge is weighted based on traffic factors like travel time or congestion.</p>
-            <p>Kruskal’s Algorithm is applied to find the Minimum Spanning Tree (MST) of the traffic network, connecting all key intersections with the minimum total weight (e.g., minimal congestion or travel time).</p>
-            <p>By selecting the least costly paths (in terms of time or congestion), Kruskal's algorithm ensures optimal routing and traffic flow across the city.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Traffic Management Case Study</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f9;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .solution {
+            background-color: #e9f7ef;
+            padding: 15px;
+            border-left: 4px solid #2ecc71;
+        }
+        .example {
+            background-color: #f9f9f9;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        .algorithm {
+            background-color: #f8d7da;
+            padding: 10px;
+            border-left: 4px solid #e74c3c;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Smart Traffic Management Case Study</h1>
+
+    <div class="section">
+        <h2>1. Adaptive Traffic Signal Control</h2>
+        <p><strong>Problem:</strong> Inefficient traffic signals causing congestion due to fixed timing, especially during high or low traffic volumes.</p>
+        <p><strong>Real-Time Example:</strong> In a city like Paris, during rush hours, one direction of traffic may face excessive delays, while in the opposite direction, traffic is sparse.</p>
+        <div class="solution">
+            <p><strong>Solution using Algorithm:</strong></p>
+            <p>- <strong>Heap Sort & Binary Search Trees (BST):</strong></p>
+            <ul>
+                <li><strong>Heap Sort</strong> can be used to prioritize traffic based on real-time flow. When traffic flow data from sensors are received, vehicles in the congested areas can be prioritized.</li>
+                <li><strong>Binary Search Trees (BST)</strong> help in maintaining and quickly retrieving the traffic data in sorted order for processing traffic signals.</li>
+            </ul>
         </div>
-        <div class="section">
-            <h3>Kruskal's Code</h3>
-            <h4 onclick="toggleDetails('kruskalCode')" style="cursor: pointer; color: #007bff;">Click to view Kruskal's Algorithm Implementation</h4>
-            <div id="kruskalCode" style="display: none;">
-                <pre>
-#include <bits/stdc++.h>
-using namespace std;
-
-class Kruskal {
-public:
-    struct Edge {
-        int u, v, w;
-    };
-
-    int n, m, count = 0;
-    vector<Edge> edges, ans;
-    int* arr;
-
-    Kruskal() {
-        cout << "Enter number of vertices: ";
-        cin >> n;
-        cout << "Enter number of edges in the graph:";
-        cin >> m;
-
-        edges.resize(m);
-        cout << "Enter values for u, v, w one by one:\n";
-        for (int i = 0; i < m; i++) {
-            cin >> edges[i].u >> edges[i].v >> edges[i].w;
-        }
-
-        mergeSort(edges);
-
-        arr = (int*)malloc(sizeof(int) * n);
-        for (int i = 0; i < n; i++) {
-            arr[i] = i;
-        }
-    }
-
-    void merge(vector<Edge>& left, vector<Edge>& right, vector<Edge>& result) {
-        int i = 0, j = 0, k = 0, p = left.size(), q = right.size();
-        while (i < p && j < q) {
-            if (left[i].w <= right[j].w) {
-                result[k++] = left[i++];
-            } else {
-                result[k++] = right[j++];
-            }
-        }
-        while (i < p) result[k++] = left[i++];
-        while (j < q) result[k++] = right[j++];
-    }
-
-    void mergeSort(vector<Edge>& edges) {
-        int n = edges.size();
-        if (n > 1) {
-            vector<Edge> left(edges.begin(), edges.begin() + n / 2);
-            vector<Edge> right(edges.begin() + n / 2, edges.end());
-            mergeSort(left);
-            mergeSort(right);
-            merge(left, right, edges);
-        }
-    }
-
-    void Union(int u, int v) {
-        int temp = arr[u];
-        for (int i = 0; i < n; i++) {
-            if (arr[i] == temp)
-                arr[i] = arr[v];
-        }
-    }
-
-    bool Find(int u, int v) {
-        if (arr[u] == arr[v])
-        return 1;
-        else
-            return 0;
-    }
-
-    void spanning_tree() {
-        int i = 0;
-        while (count< n - 1 && i < m) {
-            if (Find(edges[i].u, edges[i].v)==0) {
-                Union(edges[i].u, edges[i].v);
-                ans.push_back(edges[i]);
-                count++;
-            }
-            i++;
-        }
-    }
-};
-
-int main() {
-    Kruskal k;
-    k.spanning_tree();
-
-    cout << "Edges in the Minimum Spanning Tree:\n";
-    for (size_t i = 0; i < k.ans.size(); i++) {
-    cout << k.ans[i].u << " " << k.ans[i].v << " " << k.ans[i].w << endl;
-}
-
-    return 0;
-}
-                </pre>
-            </div>
+        <div class="example">
+            <p><strong>How It Helps:</strong></p>
+            <ul>
+                <li><strong>Efficient Traffic Sorting:</strong> Heap sort prioritizes intersections or lanes with higher congestion, ensuring traffic flow is better managed.</li>
+                <li><strong>Quick Access to Data:</strong> Binary search trees allow for efficient management of data points (e.g., vehicle counts, signal times), reducing the time taken to adjust signal timings.</li>
+            </ul>
+        </div>
+        <div class="algorithm">
+            <p><strong>Example:</strong> In cities like Seoul, smart traffic management systems adjust green light durations in real-time by sorting traffic flow data efficiently.</p>
         </div>
     </div>
+
+    <div class="section">
+        <h2>2. Green Corridors for Pollution Reduction</h2>
+        <p><strong>Problem:</strong> Increased emissions and pollution from vehicles stopping at multiple traffic lights.</p>
+        <p><strong>Real-Time Example:</strong> In cities like London, vehicles may get stuck at multiple red lights, resulting in significant air pollution due to idling.</p>
+        <div class="solution">
+            <p><strong>Solution using Algorithm:</strong></p>
+            <p>- <strong>Prim’s Algorithm (Minimum Spanning Tree - MST):</strong></p>
+            <ul>
+                <li><strong>Prim’s algorithm</strong> is used to find the minimum spanning tree that connects multiple intersections with minimal traffic signal stops. The objective is to find a way to create a "green corridor" where traffic can flow uninterrupted with minimal red lights.</li>
+            </ul>
+        </div>
+        <div class="example">
+            <p><strong>How It Helps:</strong></p>
+            <ul>
+                <li><strong>Minimizing Stops:</strong> By applying Prim’s MST, we can synchronize signals along a path (green corridor), allowing vehicles to pass through without stopping, thereby reducing emissions.</li>
+                <li><strong>Pollution Reduction:</strong> Fewer stops mean lower emissions, which directly reduces air pollution.</li>
+            </ul>
+        </div>
+        <div class="algorithm">
+            <p><strong>Example:</strong> In cities like San Francisco, "green wave" technologies use algorithms similar to Prim’s to ensure smoother traffic flow and lower emission levels.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. Route Planning for Emergency Vehicles</h2>
+        <p><strong>Problem:</strong> Delays in emergency vehicles like ambulances due to traffic congestion.</p>
+        <p><strong>Real-Time Example:</strong> In busy urban centers like Los Angeles, an ambulance may get stuck in traffic, causing delays in reaching emergencies.</p>
+        <div class="solution">
+            <p><strong>Solution using Algorithm:</strong></p>
+            <p>- <strong>Dijkstra’s Algorithm (Shortest Path):</strong></p>
+            <ul>
+                <li><strong>Dijkstra’s algorithm</strong> calculates the shortest path for emergency vehicles from their current location to the destination by dynamically adjusting to real-time road closures and traffic data.</li>
+            </ul>
+        </div>
+        <div class="example">
+            <p><strong>How It Helps:</strong></p>
+            <ul>
+                <li><strong>Quickest Route:</strong> This ensures that emergency vehicles take the shortest, fastest route based on real-time traffic conditions.</li>
+                <li><strong>Dynamic Adaptation:</strong> The algorithm adapts based on road closures or changing traffic patterns, allowing the vehicle to reroute instantly.</li>
+            </ul>
+        </div>
+        <div class="algorithm">
+            <p><strong>Example:</strong> Emergency vehicles in cities like New York utilize similar algorithms to ensure faster response times.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. Public Transport Optimization</h2>
+        <p><strong>Problem:</strong> Inefficient public transport schedules lead to overcrowded buses/trains or underutilized resources.</p>
+        <p><strong>Real-Time Example:</strong> In cities like São Paulo, buses might arrive either too early or too late, causing either overcrowding or underuse.</p>
+        <div class="solution">
+            <p><strong>Solution using Algorithm:</strong></p>
+            <p>- <strong>Quick Sort & AVL Trees (Balanced Binary Search Trees):</strong></p>
+            <ul>
+                <li><strong>Quick Sort</strong> can be applied to sort buses based on their routes or scheduled arrival times, ensuring that transport resources are used efficiently.</li>
+                <li><strong>AVL Trees</strong>, a type of self-balancing binary search tree, can be used to store and retrieve sorted data about bus schedules, ensuring quick adjustments based on real-time passenger demand.</li>
+            </ul>
+        </div>
+        <div class="example">
+            <p><strong>How It Helps:</strong></p>
+            <ul>
+                <li><strong>Efficient Resource Allocation:</strong> Quick Sort ensures buses are assigned to the most needed routes, while AVL Trees optimize the management of dynamic scheduling data.</li>
+                <li><strong>Optimal Utilization:</strong> Adjustments to bus arrival times can be made quickly based on real-time data, ensuring minimal overcrowding and delays.</li>
+            </ul>
+        </div>
+        <div class="algorithm">
+            <p><strong>Example:</strong> Cities like Hong Kong and Singapore use AVL Trees to dynamically adjust bus schedules based on demand and road conditions.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>5. Traffic Flow Prediction and Management</h2>
+        <p><strong>Problem:</strong> Sudden traffic jams due to accidents, road closures, or rush hour traffic.</p>
+        <p><strong>Real-Time Example:</strong> In cities like Mumbai, sudden traffic jams often occur because of unpredicted accidents or road closures, leading to major delays.</p>
+        <div class="solution">
+            <p><strong>Solution using Algorithm:</strong></p>
+            <p>- <strong>Kruskal’s Algorithm (Minimum Spanning Tree - MST) & Topological Sorting:</strong></p>
+            <ul>
+                <li><strong>Kruskal’s algorithm</strong> can be used to find the minimum spanning tree of the city's road network, connecting intersections with the least amount of congestion and avoiding heavily trafficked routes. By ensuring that traffic flow on these paths is minimized, congestion is reduced.</li>
+                <li><strong>Topological Sorting</strong> can be used to manage and prioritize road closures or diversions to optimize traffic flow during peak congestion times or accidents.</li>
+            </ul>
+        </div>
+        <div class="example">
+            <p><strong>How It Helps:</strong></p>
+            <ul>
+                <li><strong>Optimized Traffic Routing:</strong> Kruskal’s algorithm helps in identifying optimal routes for both regular and emergency traffic.</li>
+                <li><strong>Reduced Congestion:</strong> By connecting less congested areas, Kruskal’s can help alleviate traffic in critical spots, particularly after road closures or accidents.</li>
+            </ul>
+        </div>
+        <div class="algorithm">
+            <p><strong>Example:</strong> Traffic management systems in cities like London and Paris use graph-based algorithms (such as Kruskal's and Topological Sorting) to manage diversions, optimize detour routes, and avoid congestion.</p>
+        </div>
+    </div>
+
+    <h2>Conclusion:</h2>
+    <p>In this case study, we explored how various <strong>sorting techniques</strong>, <strong>graph algorithms</strong>, and <strong>tree-based algorithms</strong> can contribute to optimizing traffic management systems in urban environments. Here's a summary of the key algorithms applied:</p>
+    <ul>
+        <li><strong>Heap Sort</strong> and <strong>Binary Search Trees (BST)</strong> for efficient adaptive traffic signal control.</li>
+        <li><strong>Prim’s Algorithm (MST)</strong> to create green corridors, reducing pollution by minimizing stops.</li>
+        <li><strong>Dijkstra’s Algorithm</strong> for emergency vehicle route planning.</li>
+        <li><strong>Quick Sort</strong> and <strong>AVL Trees</strong> for public transport scheduling and optimization.</li>
+        <li><strong>Kruskal’s Algorithm (MST)</strong> and <strong>Topological Sorting</strong> for traffic flow prediction and managing congestion.</li>
+    </ul>
+    <p>These algorithms, applied with real-time data, contribute to reducing congestion, pollution, and delays while improving the overall efficiency of urban traffic systems.</p>
+
+</body>
+</html>
+
 
     <h1 onclick="toggleDetails('disasterDetails')">Impact of Natural Disasters</h1>
     <div id="disasterDetails" style="display: none;">
