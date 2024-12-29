@@ -160,6 +160,8 @@
 </head>
 <body>
 
+    <h1>Smart Traffic Management Case Study with C++ Code</h1>
+
     <div class="section">
         <h2>1. Adaptive Traffic Signal Control</h2>
         <p><strong>Problem:</strong> Inefficient traffic signals causing congestion due to fixed timing, especially during high or low traffic volumes.</p>
@@ -364,8 +366,206 @@ int main() {
             </pre>
         </details>
     </div>
-     </div>
- </div>
+
+    <div class="section">
+        <h2>3. Shortest Path for Emergency Vehicles</h2>
+        <p><strong>Problem:</strong> Difficulty in finding the fastest route for emergency vehicles due to unpredictable traffic conditions.</p>
+        <p><strong>Real-Time Example:</strong> In a city like New York, emergency vehicles often face traffic congestion that delays their response time.</p>
+        <div class="solution">
+            <p><strong>Solution using Algorithm:</strong></p>
+            <p>- <strong>Dijkstra's Algorithm:</strong></p>
+            <ul>
+                <li><strong>Dijkstra’s Algorithm</strong> can be used to calculate the shortest path from the current location of an emergency vehicle to its destination, considering real-time road conditions (traffic, road closures, etc.).</li>
+            </ul>
+        </div>
+        <div class="example">
+            <p><strong>How It Helps:</strong></p>
+            <ul>
+                <li><strong>Optimized Routes:</strong> Dijkstra’s algorithm ensures that emergency vehicles take the quickest available route, reducing response time.</li>
+                <li><strong>Real-Time Adjustments:</strong> The algorithm can be adjusted to factor in real-time traffic data, ensuring that the shortest path is recalculated as needed.</li>
+            </ul>
+        </div>
+
+        <details>
+            <summary>Dijkstra’s Algorithm Code</summary>
+            <pre>
+#include <iostream>
+#include <vector>
+#include <climits>
+
+using namespace std;
+
+#define V 9
+
+int minDistance(int dist[], bool sptSet[]) {
+    int min = INT_MAX, min_index;
+    for (int v = 0; v < V; v++) {
+        if (!sptSet[v] && dist[v] <= min) {
+            min = dist[v];
+            min_index = v;
+        }
+    }
+    return min_index;
+}
+
+void dijkstra(int graph[V][V], int src) {
+    int dist[V];
+    bool sptSet[V];
+
+    for (int i = 0; i < V; i++) {
+        dist[i] = INT_MAX;
+        sptSet[i] = false;
+    }
+
+    dist[src] = 0;
+
+    for (int count = 0; count < V - 1; count++) {
+        int u = minDistance(dist, sptSet);
+        sptSet[u] = true;
+
+        for (int v = 0; v < V; v++) {
+            if (!sptSet[v] && graph[u][v] && dist[u] != INT_MAX && dist[u] + graph[u][v] < dist[v]) {
+                dist[v] = dist[u] + graph[u][v];
+            }
+        }
+    }
+
+    cout << "Vertex \t Distance from Source\n";
+    for (int i = 0; i < V; i++) {
+        cout << i << " \t " << dist[i] << endl;
+    }
+}
+
+int main() {
+    int graph[V][V] = { {0, 4, 0, 0, 0, 0, 0, 8, 0},
+                        {4, 0, 8, 0, 0, 0, 0, 0, 0},
+                        {0, 8, 0, 7, 0, 4, 0, 0, 0},
+                        {0, 0, 7, 0, 9, 0, 14, 0, 0},
+                        {0, 0, 0, 9, 0, 10, 0, 0, 0},
+                        {0, 0, 4, 0, 10, 0, 2, 0, 0},
+                        {0, 0, 0, 14, 0, 2, 0, 1, 6},
+                        {8, 0, 0, 0, 0, 0, 1, 0, 7},
+                        {0, 0, 0, 0, 0, 0, 6, 7, 0} };
+
+    dijkstra(graph, 0);
+
+    return 0;
+}
+            </pre>
+        </details>
+    </div>
+
+    <div class="section">
+        <h2>4. Optimized Traffic Routing for Public Transport</h2>
+        <p><strong>Problem:</strong> Inefficiency in public transport routes causing delays and overcrowding.</p>
+        <p><strong>Real-Time Example:</strong> In cities like Tokyo, buses and trains may experience delays due to suboptimal route planning.</p>
+        <div class="solution">
+            <p><strong>Solution using Algorithm:</strong></p>
+            <p>- <strong>Kruskal’s Algorithm (Minimum Spanning Tree):</strong></p>
+            <ul>
+                <li><strong>Kruskal’s Algorithm</strong> can be used to create an optimized network of routes for public transportation systems, ensuring that the minimal number of connections are used, leading to faster travel times.</li>
+            </ul>
+        </div>
+        <div class="example">
+            <p><strong>How It Helps:</strong></p>
+            <ul>
+                <li><strong>Efficient Routing:</strong> Kruskal’s algorithm minimizes the number of routes while maintaining an optimal connection between stops, reducing travel time.</li>
+                <li><strong>Reduced Overcrowding:</strong> Optimizing routes based on the algorithm ensures that buses and trains are distributed more evenly across the network.</li>
+            </ul>
+        </div>
+
+        <details>
+            <summary>Kruskal’s Algorithm Code</summary>
+            <pre>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Edge {
+public:
+    int src, dest, weight;
+    Edge(int s, int d, int w) : src(s), dest(d), weight(w) {}
+};
+
+bool compare(Edge e1, Edge e2) {
+    return e1.weight < e2.weight;
+}
+
+class DisjointSet {
+public:
+    vector<int> parent, rank;
+    
+    DisjointSet(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i < n; i++) parent[i] = i;
+    }
+    
+    int find(int x) {
+        if (parent[x] != x)
+            parent[x] = find(parent[x]);
+        return parent[x];
+    }
+    
+    void unionSets(int x, int y) {
+        int rootX = find(x);
+        int rootY = find(y);
+        if (rootX != rootY) {
+            if (rank[rootX] > rank[rootY]) 
+                parent[rootY] = rootX;
+            else if (rank[rootX] < rank[rootY]) 
+                parent[rootX] = rootY;
+            else {
+                parent[rootY] = rootX;
+                rank[rootX]++;
+            }
+        }
+    }
+};
+
+void kruskal(vector<Edge>& edges, int V) {
+    sort(edges.begin(), edges.end(), compare);
+    
+    DisjointSet ds(V);
+    vector<Edge> mst;
+    
+    for (auto& e : edges) {
+        int u = e.src;
+        int v = e.dest;
+        
+        if (ds.find(u) != ds.find(v)) {
+            mst.push_back(e);
+            ds.unionSets(u, v);
+        }
+    }
+    
+    cout << "Edges in MST:" << endl;
+    for (auto& e : mst) {
+        cout << e.src << " - " << e.dest << " : " << e.weight << endl;
+    }
+}
+
+int main() {
+    vector<Edge> edges;
+    edges.push_back(Edge(0, 1, 10));
+    edges.push_back(Edge(0, 2, 6));
+    edges.push_back(Edge(0, 3, 5));
+    edges.push_back(Edge(1, 3, 15));
+    edges.push_back(Edge(2, 3, 4));
+
+    int V = 4; // Number of vertices
+    kruskal(edges, V);
+    return 0;
+}
+            </pre>
+        </details>
+    </div>
+                 </div>
+             </div>
+
+
 
 
 
