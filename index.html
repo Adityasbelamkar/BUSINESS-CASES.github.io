@@ -471,14 +471,67 @@
             <li><strong>11.4.3</strong> - The number of sites included in the World Heritage list, and the status of the conservation efforts on those sites.</li>
         </ul>
     </div>
-        <div class="section">
-            <h3>Steps for Managing Tourism</h3>
-            <h4>Identifying Popular Tourism Spots</h4>
-            <p><strong>Problem:</strong> Identifying the most visited tourist spots in a city is crucial for effective resource allocation and planning.</p>
-            <p><strong>Solution:</strong> Sorting these spots based on the number of visits helps optimize infrastructure, manage crowds, and prioritize promotional efforts.</p>
-        </div>
-        <div class="section">
-         
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Managing Tourism in Urban Areas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f0f8ff; /* Light blue background */
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        h3 {
+            color: #16a085;
+        }
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        code {
+            background-color: #ecf0f1;
+            padding: 5px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #34495e;
+        }
+        ul {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        .algorithm-section {
+            margin-bottom: 30px;
+        }
+        .algorithm-code {
+            background-color: #eaf2f8;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+        h4 {
+            color: #2980b9;
+            cursor: pointer;
+        }
+        h4:hover {
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+
     <div class="content">
         <h2>Steps for Managing Tourism</h2>
 
@@ -487,16 +540,42 @@
             <p><strong>Problem:</strong> Cities need to prioritize tourist spots based on popularity for efficient resource allocation.</p>
             <p><strong>Solution:</strong> Use <strong>Merge Sort</strong> to rank locations by visitor count.</p>
 
-            <h4>Algorithm: Merge Sort</h4>
+            <h4 onclick="toggleCode('mergeSortCode')">Algorithm: Merge Sort</h4>
             <p><strong>Purpose:</strong> Sort tourism spots by their annual or monthly visit counts.</p>
-            <p><strong>Implementation:</strong></p>
-            <ul>
-                <li><strong>Input:</strong> List of tourist spots with visit counts.</li>
-                <li><strong>Output:</strong> Sorted list of spots from highest to lowest visits.</li>
-            </ul>
-            <p><strong>Example:</strong></p>
-            <pre><code>Spots: Central Plaza (120,000), Lakeview Park (80,000), Hilltop Observatory (100,000), Historic Market (95,000).
-Result (sorted): Central Plaza → Hilltop Observatory → Historic Market → Lakeview Park.</code></pre>
+            <p><strong>Code Example:</strong></p>
+            <div id="mergeSortCode" class="algorithm-code">
+                <pre><code>
+function mergeSort(arr) {
+    if (arr.length <= 1) return arr;
+    let mid = Math.floor(arr.length / 2);
+    let left = mergeSort(arr.slice(0, mid));
+    let right = mergeSort(arr.slice(mid));
+    return merge(left, right);
+}
+
+function merge(left, right) {
+    let result = [], i = 0, j = 0;
+    while (i < left.length && j < right.length) {
+        if (left[i].visits > right[j].visits) {
+            result.push(left[i]);
+            i++;
+        } else {
+            result.push(right[j]);
+            j++;
+        }
+    }
+    return result.concat(left.slice(i)).concat(right.slice(j));
+}
+
+const spots = [
+    { name: "Central Plaza", visits: 120000 },
+    { name: "Lakeview Park", visits: 80000 },
+    { name: "Hilltop Observatory", visits: 100000 },
+    { name: "Historic Market", visits: 95000 }
+];
+console.log(mergeSort(spots));
+                </code></pre>
+            </div>
         </div>
 
         <div class="algorithm-section">
@@ -504,7 +583,7 @@ Result (sorted): Central Plaza → Hilltop Observatory → Historic Market → L
             <p><strong>Problem:</strong> Tourists need to travel efficiently between attractions.</p>
             <p><strong>Solution:</strong> Use <strong>Floyd-Warshall</strong> for finding the shortest paths between all pairs of spots.</p>
 
-            <h4>Algorithm: Floyd-Warshall</h4>
+            <h4 onclick="toggleCode('floydWarshallCode')">Algorithm: Floyd-Warshall</h4>
             <p><strong>Purpose:</strong> Compute shortest paths between all tourist spots in a city.</p>
             <p><strong>Implementation:</strong></p>
             <ul>
@@ -512,13 +591,15 @@ Result (sorted): Central Plaza → Hilltop Observatory → Historic Market → L
                 <li><strong>Output:</strong> A matrix with shortest travel times between all pairs of spots.</li>
             </ul>
             <p><strong>Example:</strong></p>
-            <pre><code>Areas: Central Plaza, Lakeview Park, Hilltop Observatory, Historic Market.
+            <div id="floydWarshallCode" class="algorithm-code">
+                <pre><code>Areas: Central Plaza, Lakeview Park, Hilltop Observatory, Historic Market.
 Result:  
 Shortest Path Matrix:
 Central Plaza → Lakeview Park: 15 mins  
 Lakeview Park → Hilltop Observatory: 20 mins  
 Central Plaza → Hilltop Observatory: 30 mins  
 ...</code></pre>
+            </div>
         </div>
 
         <div class="algorithm-section">
@@ -526,7 +607,7 @@ Central Plaza → Hilltop Observatory: 30 mins
             <p><strong>Problem:</strong> Accurate prediction of tourist footfall helps in preparing for peak seasons.</p>
             <p><strong>Solution:</strong> Use <strong>Dijkstra's Algorithm</strong> to find the most optimal routes that visitors take, which can be used to predict where congestion or high footfall may occur.</p>
 
-            <h4>Algorithm: Dijkstra's Algorithm</h4>
+            <h4 onclick="toggleCode('dijkstraCode')">Algorithm: Dijkstra's Algorithm</h4>
             <p><strong>Purpose:</strong> Find the shortest path in terms of travel time or distance from one location to another, helping to predict the flow of visitors between popular spots.</p>
             <p><strong>Concept:</strong> Dijkstra’s algorithm calculates the shortest path from a starting node (tourist spot) to all other nodes (other spots), helping in understanding which routes will see the most visitors. By examining the number of visitors traveling along each route, the algorithm can predict footfall at different locations.</p>
             <p><strong>Implementation:</strong></p>
@@ -535,8 +616,10 @@ Central Plaza → Hilltop Observatory: 30 mins
                 <li><strong>Output:</strong> Shortest paths from one spot to all others.</li>
             </ul>
             <p><strong>Example:</strong></p>
-            <pre><code>Areas: Central Plaza → Hilltop Observatory → Lakeview Park.
+            <div id="dijkstraCode" class="algorithm-code">
+                <pre><code>Areas: Central Plaza → Hilltop Observatory → Lakeview Park.
 Result: Dijkstra’s algorithm finds the fastest paths, which can predict that Central Plaza will see heavy traffic because it's connected to several key locations.</code></pre>
+            </div>
         </div>
 
         <div class="algorithm-section">
@@ -544,7 +627,7 @@ Result: Dijkstra’s algorithm finds the fastest paths, which can predict that C
             <p><strong>Problem:</strong> Popular spots often face traffic congestion, frustrating tourists and locals.</p>
             <p><strong>Solution:</strong> Implement <strong>Bellman-Ford Algorithm</strong> to reroute tourists dynamically.</p>
 
-            <h4>Algorithm: Bellman-Ford</h4>
+            <h4 onclick="toggleCode('bellmanFordCode')">Algorithm: Bellman-Ford</h4>
             <p><strong>Purpose:</strong> Identify shortest paths dynamically, even with real-time traffic changes.</p>
             <p><strong>Implementation:</strong></p>
             <ul>
@@ -552,8 +635,10 @@ Result: Dijkstra’s algorithm finds the fastest paths, which can predict that C
                 <li><strong>Output:</strong> Adjusted routes to reduce congestion.</li>
             </ul>
             <p><strong>Example:</strong></p>
-            <pre><code>Congestion detected on the main road to Central Plaza.
+            <div id="bellmanFordCode" class="algorithm-code">
+                <pre><code>Congestion detected on the main road to Central Plaza.
 Result: Tourists rerouted via secondary roads to reach the spot.</code></pre>
+            </div>
         </div>
 
         <div class="algorithm-section">
@@ -561,25 +646,59 @@ Result: Tourists rerouted via secondary roads to reach the spot.</code></pre>
             <p><strong>Problem:</strong> Tourism revenue can be maximized with dynamic pricing strategies.</p>
             <p><strong>Solution:</strong> Use <strong>Breadth-First Search (BFS)</strong> to identify and price tourist spots based on demand and distance from popular tourist areas.</p>
 
-            <h4>Algorithm: Breadth-First Search (BFS)</h4>
+            <h4 onclick="toggleCode('bfsCode')">Algorithm: Breadth-First Search (BFS)</h4>
             <p><strong>Purpose:</strong> Explore all possible tourist spots by visiting neighboring nodes first, helping to identify which spots are the most connected and, therefore, most likely to experience higher footfall. The algorithm can then be used for dynamic pricing by identifying the spots with the highest demand and adjusting prices accordingly.</p>
             <p><strong>Concept:</strong> BFS explores all tourist spots level by level, starting from the most popular spots and expanding outward. This can be used to identify tourist spots that may see increasing demand as people visit nearby spots.</p>
-            <p><strong>Implementation:</strong></p>
-            <ul>
-                <li><strong>Input:</strong> A graph of tourist spots and their connections (i.e., which spots are connected to each other).</li>
-                <li><strong>Output:</strong> Identifying tourist spots that are likely to be visited based on proximity to other spots.</li>
-            </ul>
-            <p><strong>Example:</strong></p>
-            <pre><code>Area: Lakeview Park (central location) → Nearby attractions (Historic Market, Hilltop Observatory).
-Result: Dynamic pricing adjusts as more tourists visit neighboring spots.</code></pre>
+            <p><strong>Code Example:</strong></p>
+            <div id="bfsCode" class="algorithm-code">
+                <pre><code>
+function bfs(graph, start) {
+    let visited = new Set();
+    let queue = [start];
+    while (queue.length > 0) {
+        let current = queue.shift();
+        if (!visited.has(current)) {
+            visited.add(current);
+            console.log(current);
+            let neighbors = graph[current] || [];
+            for (let neighbor of neighbors) {
+                if (!visited.has(neighbor)) {
+                    queue.push(neighbor);
+                }
+            }
+        }
+    }
+}
+
+const touristSpots = {
+    "Central Plaza": ["Historic Market", "Lakeview Park"],
+    "Lakeview Park": ["Central Plaza", "Hilltop Observatory"],
+    "Hilltop Observatory": ["Lakeview Park"],
+    "Historic Market": ["Central Plaza"]
+};
+
+bfs(touristSpots, "Central Plaza"); // Start BFS from Central Plaza
+                </code></pre>
+            </div>
         </div>
 
     </div>
 
     <div class="content">
         <h2>Conclusion</h2>
-        <p>By employing algorithms such as <strong>Merge Sort</strong> for ranking, <strong>Floyd-Warshall</strong> for route optimization, <strong>Dijkstra's Algorithm</strong> for predicting visitor trends, and <strong>Breadth-First Search (BFS)</strong> for dynamic pricing, cities can design smarter tourism systems. These data-driven approaches enhance efficiency, support sustainability, and improve the visitor experience.</p>
+        <p>By employing algorithms such as <strong>Merge Sort</strong> for ranking, <strong>Floyd-Warshall</strong> for route optimization, <strong>Dijkstra's Algorithm</strong> for predicting visitor trends, and <strong>Breadth-First Search (BFS)</strong> for dynamic pricing, cities can design smarter tourism systems. These data-driven approaches enhance efficiency, support sustainability, and improve the visitor experience, all while aligning with global goals like <strong>SDG 11.4</strong> to protect and safeguard cultural and natural heritage.</p>
     </div>
+
+    <script>
+        function toggleCode(id) {
+            var codeElement = document.getElementById(id);
+            if (codeElement.style.display === "none" || codeElement.style.display === "") {
+                codeElement.style.display = "block";
+            } else {
+                codeElement.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
