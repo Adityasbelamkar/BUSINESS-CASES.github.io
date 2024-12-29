@@ -593,14 +593,21 @@ int main() {
             margin: 0;
             padding: 20px;
             background-color: #f4f4f9;
+            animation: fadeIn 2s ease-in;
         }
         h1, h2 {
             color: #333;
+        }
+        h1 {
+            background-color: #ffefd5;
+            padding: 15px;
+            animation: slideInFromTop 1.5s ease-out;
         }
         table {
             width: 100%;
             margin: 20px 0;
             border-collapse: collapse;
+            animation: zoomIn 1s ease-in-out;
         }
         table, th, td {
             border: 1px solid #ddd;
@@ -615,6 +622,39 @@ int main() {
         }
         .section {
             margin-bottom: 40px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -723,7 +763,6 @@ int main() {
         <p><strong>For prioritization tasks:</strong> Sorting techniques provide reliable methods for ranking and organizing disaster-related data.</p>
         <p><strong>For data updates and search:</strong> Skip lists provide fast searching and real-time updates, ensuring efficiency in a rapidly changing disaster environment.</p>
     </div>
-
         </div>
     </div>
 
