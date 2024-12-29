@@ -112,7 +112,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Traffic Management Case Study</title>
+    <title>Smart Traffic Management Case Study with C++ Code</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -142,10 +142,23 @@
             border-left: 4px solid #e74c3c;
             margin-top: 10px;
         }
+        details {
+            margin-top: 10px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+        }
+        pre {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
     </style>
 </head>
 <body>
-
 
     <div class="section">
         <h2>1. Adaptive Traffic Signal Control</h2>
@@ -169,6 +182,93 @@
         <div class="algorithm">
             <p><strong>Example:</strong> In cities like Seoul, smart traffic management systems adjust green light durations in real-time by sorting traffic flow data efficiently.</p>
         </div>
+
+        <details>
+            <summary>Heap Sort and Binary Search Tree Code</summary>
+            <pre>
+#include <iostream>
+#include <queue>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+// Function for heap sort
+void heapify(vector<int>& arr, int n, int i) {
+    int largest = i;
+    int left = 2*i + 1;
+    int right = 2*i + 2;
+    
+    if (left < n && arr[left] > arr[largest]) {
+        largest = left;
+    }
+    if (right < n && arr[right] > arr[largest]) {
+        largest = right;
+    }
+    if (largest != i) {
+        swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+// Binary Search Tree (BST) Node
+struct Node {
+    int key;
+    Node* left, *right;
+    Node(int k) : key(k), left(nullptr), right(nullptr) {}
+};
+
+// Function to insert a new node in the BST
+Node* insert(Node* root, int key) {
+    if (root == nullptr) return new Node(key);
+    if (key < root->key) root->left = insert(root->left, key);
+    else root->right = insert(root->right, key);
+    return root;
+}
+
+// Function to print the BST In-order traversal
+void inorder(Node* root) {
+    if (root == nullptr) return;
+    inorder(root->left);
+    cout << root->key << " ";
+    inorder(root->right);
+}
+
+int main() {
+    vector<int> trafficData = {7, 2, 5, 9, 4, 1, 8};
+    
+    // Heap Sort
+    int n = trafficData.size();
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(trafficData, n, i);
+    }
+    for (int i = n - 1; i >= 0; i--) {
+        swap(trafficData[0], trafficData[i]);
+        heapify(trafficData, i, 0);
+    }
+    
+    cout << "Sorted traffic data (Heap Sort): ";
+    for (int i = 0; i < n; i++) {
+        cout << trafficData[i] << " ";
+    }
+    cout << endl;
+    
+    // BST Example
+    Node* root = nullptr;
+    root = insert(root, 5);
+    root = insert(root, 2);
+    root = insert(root, 8);
+    root = insert(root, 1);
+    root = insert(root, 3);
+    
+    cout << "In-order traversal of the BST: ";
+    inorder(root);
+    cout << endl;
+    
+    return 0;
+}
+            </pre>
+        </details>
     </div>
 
     <div class="section">
@@ -192,91 +292,81 @@
         <div class="algorithm">
             <p><strong>Example:</strong> In cities like San Francisco, "green wave" technologies use algorithms similar to Prim’s to ensure smoother traffic flow and lower emission levels.</p>
         </div>
-    </div>
 
-    <div class="section">
-        <h2>3. Route Planning for Emergency Vehicles</h2>
-        <p><strong>Problem:</strong> Delays in emergency vehicles like ambulances due to traffic congestion.</p>
-        <p><strong>Real-Time Example:</strong> In busy urban centers like Los Angeles, an ambulance may get stuck in traffic, causing delays in reaching emergencies.</p>
-        <div class="solution">
-            <p><strong>Solution using Algorithm:</strong></p>
-            <p>- <strong>Dijkstra’s Algorithm (Shortest Path):</strong></p>
-            <ul>
-                <li><strong>Dijkstra’s algorithm</strong> calculates the shortest path for emergency vehicles from their current location to the destination by dynamically adjusting to real-time road closures and traffic data.</li>
-            </ul>
-        </div>
-        <div class="example">
-            <p><strong>How It Helps:</strong></p>
-            <ul>
-                <li><strong>Quickest Route:</strong> This ensures that emergency vehicles take the shortest, fastest route based on real-time traffic conditions.</li>
-                <li><strong>Dynamic Adaptation:</strong> The algorithm adapts based on road closures or changing traffic patterns, allowing the vehicle to reroute instantly.</li>
-            </ul>
-        </div>
-        <div class="algorithm">
-            <p><strong>Example:</strong> Emergency vehicles in cities like New York utilize similar algorithms to ensure faster response times.</p>
-        </div>
-    </div>
+        <details>
+            <summary>Prim’s Algorithm Code</summary>
+            <pre>
+#include <iostream>
+#include <vector>
+#include <climits>
 
-    <div class="section">
-        <h2>4. Public Transport Optimization</h2>
-        <p><strong>Problem:</strong> Inefficient public transport schedules lead to overcrowded buses/trains or underutilized resources.</p>
-        <p><strong>Real-Time Example:</strong> In cities like São Paulo, buses might arrive either too early or too late, causing either overcrowding or underuse.</p>
-        <div class="solution">
-            <p><strong>Solution using Algorithm:</strong></p>
-            <p>- <strong>Quick Sort & AVL Trees (Balanced Binary Search Trees):</strong></p>
-            <ul>
-                <li><strong>Quick Sort</strong> can be applied to sort buses based on their routes or scheduled arrival times, ensuring that transport resources are used efficiently.</li>
-                <li><strong>AVL Trees</strong>, a type of self-balancing binary search tree, can be used to store and retrieve sorted data about bus schedules, ensuring quick adjustments based on real-time passenger demand.</li>
-            </ul>
-        </div>
-        <div class="example">
-            <p><strong>How It Helps:</strong></p>
-            <ul>
-                <li><strong>Efficient Resource Allocation:</strong> Quick Sort ensures buses are assigned to the most needed routes, while AVL Trees optimize the management of dynamic scheduling data.</li>
-                <li><strong>Optimal Utilization:</strong> Adjustments to bus arrival times can be made quickly based on real-time data, ensuring minimal overcrowding and delays.</li>
-            </ul>
-        </div>
-        <div class="algorithm">
-            <p><strong>Example:</strong> Cities like Hong Kong and Singapore use AVL Trees to dynamically adjust bus schedules based on demand and road conditions.</p>
-        </div>
-    </div>
+using namespace std;
 
-    <div class="section">
-        <h2>5. Traffic Flow Prediction and Management</h2>
-        <p><strong>Problem:</strong> Sudden traffic jams due to accidents, road closures, or rush hour traffic.</p>
-        <p><strong>Real-Time Example:</strong> In cities like Mumbai, sudden traffic jams often occur because of unpredicted accidents or road closures, leading to major delays.</p>
-        <div class="solution">
-            <p><strong>Solution using Algorithm:</strong></p>
-            <p>- <strong>Kruskal’s Algorithm (Minimum Spanning Tree - MST) & Topological Sorting:</strong></p>
-            <ul>
-                <li><strong>Kruskal’s algorithm</strong> can be used to find the minimum spanning tree of the city's road network, connecting intersections with the least amount of congestion and avoiding heavily trafficked routes. By ensuring that traffic flow on these paths is minimized, congestion is reduced.</li>
-                <li><strong>Topological Sorting</strong> can be used to manage and prioritize road closures or diversions to optimize traffic flow during peak congestion times or accidents.</li>
-            </ul>
-        </div>
-        <div class="example">
-            <p><strong>How It Helps:</strong></p>
-            <ul>
-                <li><strong>Optimized Traffic Routing:</strong> Kruskal’s algorithm helps in identifying optimal routes for both regular and emergency traffic.</li>
-                <li><strong>Reduced Congestion:</strong> By connecting less congested areas, Kruskal’s can help alleviate traffic in critical spots, particularly after road closures or accidents.</li>
-            </ul>
-        </div>
-        <div class="algorithm">
-            <p><strong>Example:</strong> Traffic management systems in cities like London and Paris use graph-based algorithms (such as Kruskal's and Topological Sorting) to manage diversions, optimize detour routes, and avoid congestion.</p>
-        </div>
-    </div>
+#define V 5 // Number of vertices
 
-    <h2>Conclusion:</h2>
-    <p>In this case study, we explored how various <strong>sorting techniques</strong>, <strong>graph algorithms</strong>, and <strong>tree-based algorithms</strong> can contribute to optimizing traffic management systems in urban environments. Here's a summary of the key algorithms applied:</p>
-    <ul>
-        <li><strong>Heap Sort</strong> and <strong>Binary Search Trees (BST)</strong> for efficient adaptive traffic signal control.</li>
-        <li><strong>Prim’s Algorithm (MST)</strong> to create green corridors, reducing pollution by minimizing stops.</li>
-        <li><strong>Dijkstra’s Algorithm</strong> for emergency vehicle route planning.</li>
-        <li><strong>Quick Sort</strong> and <strong>AVL Trees</strong> for public transport scheduling and optimization.</li>
-        <li><strong>Kruskal’s Algorithm (MST)</strong> and <strong>Topological Sorting</strong> for traffic flow prediction and managing congestion.</li>
-    </ul>
-    <p>These algorithms, applied with real-time data, contribute to reducing congestion, pollution, and delays while improving the overall efficiency of urban traffic systems.</p>
-        </div>
+int minKey(int key[], bool mstSet[]) {
+    int min = INT_MAX, min_index;
+    for (int v = 0; v < V; v++) {
+        if (!mstSet[v] && key[v] < min) {
+            min = key[v];
+            min_index = v;
+        }
+    }
+    return min_index;
+}
+
+void printMST(int parent[], int graph[V][V]) {
+    cout << "Edge \tWeight\n";
+    for (int i = 1; i < V; i++) {
+        cout << parent[i] << " - " << i << "\t" << graph[i][parent[i]] << endl;
+    }
+}
+
+void primMST(int graph[V][V]) {
+    int parent[V]; // Array to store the constructed MST
+    int key[V]; // Key values to pick minimum weight edge
+    bool mstSet[V]; // To represent the vertices included in MST
+
+    for (int i = 0; i < V; i++) {
+        key[i] = INT_MAX;
+        mstSet[i] = false;
+    }
+
+    key[0] = 0;
+    parent[0] = -1;
+
+    for (int count = 0; count < V - 1; count++) {
+        int u = minKey(key, mstSet);
+        mstSet[u] = true;
+
+        for (int v = 0; v < V; v++) {
+            if (graph[u][v] && !mstSet[v] && graph[u][v] < key[v]) {
+                parent[v] = u;
+                key[v] = graph[u][v];
+            }
+        }
+    }
+
+    printMST(parent, graph);
+}
+
+int main() {
+    int graph[V][V] = { {0, 2, 0, 6, 0},
+                        {2, 0, 3, 8, 5},
+                        {0, 3, 0, 0, 7},
+                        {6, 8, 0, 0, 9},
+                        {0, 5, 7, 9, 0} };
+
+    primMST(graph);
+
+    return 0;
+}
+            </pre>
+        </details>
     </div>
+     </div>
+ </div>
+
 
 
     <h1 onclick="toggleDetails('disasterDetails')">Impact of Natural Disasters</h1>
