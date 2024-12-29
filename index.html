@@ -660,7 +660,7 @@ int main() {
     </style>
 </head>
 <body>
-    <h1>Impact of Natural Disasters on Cities: Case Study</h1>
+
     <p>This case study examines various algorithms and data structures used to address challenges arising from natural disasters in cities. By applying concepts like AVL trees, sorting techniques, edges, nodes, and skip lists, we can create more effective strategies for disaster preparedness, response, and recovery.</p>
 
     <div class="section">
@@ -800,104 +800,359 @@ int main() {
     <div class="content">
         <h2>Steps for Managing Tourism</h2>
 
-        <div class="algorithm-section">
-            <h3>1. Ranking Popular Tourism Spots</h3>
-            <p><strong>Problem:</strong> Cities need to prioritize tourist spots based on popularity for efficient resource allocation.</p>
-            <p><strong>Solution:</strong> Use <strong>Merge Sort</strong> to rank locations by visitor count.</p>
+      <div class="algorithm-section">
+    <h3>1. Ranking Popular Tourism Spots</h3>
+    <p><strong>Problem:</strong> Cities need to prioritize tourist spots based on popularity for efficient resource allocation.</p>
+    <p><strong>Solution:</strong> Use <strong>Merge Sort</strong> to rank locations by visitor count.</p>
 
-            <h4>Algorithm: Merge Sort</h4>
-            <p><strong>Purpose:</strong> Sort tourism spots by their annual or monthly visit counts.</p>
-            <p><strong>Implementation:</strong></p>
-            <ul>
-                <li><strong>Input:</strong> List of tourist spots with visit counts.</li>
-                <li><strong>Output:</strong> Sorted list of spots from highest to lowest visits.</li>
-            </ul>
-            <p><strong>Example:</strong></p>
-            <pre><code>Spots: Central Plaza (120,000), Lakeview Park (80,000), Hilltop Observatory (100,000), Historic Market (95,000).
+    <h4>Algorithm: Merge Sort</h4>
+    <p><strong>Purpose:</strong> Sort tourism spots by their annual or monthly visit counts.</p>
+    <p><strong>Implementation:</strong></p>
+    <ul>
+        <li><strong>Input:</strong> List of tourist spots with visit counts.</li>
+        <li><strong>Output:</strong> Sorted list of spots from highest to lowest visits.</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <pre><code>Spots: Central Plaza (120,000), Lakeview Park (80,000), Hilltop Observatory (100,000), Historic Market (95,000).
 Result (sorted): Central Plaza → Hilltop Observatory → Historic Market → Lakeview Park.</code></pre>
-        </div>
 
-        <div class="algorithm-section">
-            <h3>2. Finding Optimal Paths Between Tourist Spots</h3>
-            <p><strong>Problem:</strong> Tourists need to travel efficiently between attractions.</p>
-            <p><strong>Solution:</strong> Use <strong>Floyd-Warshall</strong> for finding the shortest paths between all pairs of spots.</p>
+    <button onclick="toggleCode('mergeSortCode')">Show Full Code</button>
+    <div id="mergeSortCode" style="display:none;">
+        <pre><code>
+#include <iostream>
+#include <vector>
+#include <string>
 
-            <h4>Algorithm: Floyd-Warshall</h4>
-            <p><strong>Purpose:</strong> Compute shortest paths between all tourist spots in a city.</p>
-            <p><strong>Implementation:</strong></p>
-            <ul>
-                <li><strong>Input:</strong> A graph representing tourist spots as nodes and roads with travel times as edges.</li>
-                <li><strong>Output:</strong> A matrix with shortest travel times between all pairs of spots.</li>
-            </ul>
-            <p><strong>Example:</strong></p>
-            <pre><code>Areas: Central Plaza, Lakeview Park, Hilltop Observatory, Historic Market.
+using namespace std;
+
+void merge(vector<pair<string, int>>& spots, int left, int right) {
+    if (left >= right) return;
+    int mid = left + (right - left) / 2;
+    merge(spots, left, mid);
+    merge(spots, mid + 1, right);
+    
+    vector<pair<string, int>> temp;
+    int i = left, j = mid + 1;
+    while (i <= mid && j <= right) {
+        if (spots[i].second >= spots[j].second) {
+            temp.push_back(spots[i]);
+            i++;
+        } else {
+            temp.push_back(spots[j]);
+            j++;
+        }
+    }
+    while (i <= mid) temp.push_back(spots[i++]);
+    while (j <= right) temp.push_back(spots[j++]);
+    
+    for (int i = left; i <= right; i++) spots[i] = temp[i - left];
+}
+
+int main() {
+    vector<pair<string, int>> spots = {{"Central Plaza", 120000}, {"Lakeview Park", 80000}, {"Hilltop Observatory", 100000}, {"Historic Market", 95000}};
+    merge(spots, 0, spots.size() - 1);
+    
+    cout << "Sorted Spots:" << endl;
+    for (const auto& spot : spots) {
+        cout << spot.first << " → " << spot.second << " visits" << endl;
+    }
+    return 0;
+}
+        </code></pre>
+    </div>
+</div>
+
+<div class="algorithm-section">
+    <h3>2. Finding Optimal Paths Between Tourist Spots</h3>
+    <p><strong>Problem:</strong> Tourists need to travel efficiently between attractions.</p>
+    <p><strong>Solution:</strong> Use <strong>Floyd-Warshall</strong> for finding the shortest paths between all pairs of spots.</p>
+
+    <h4>Algorithm: Floyd-Warshall</h4>
+    <p><strong>Purpose:</strong> Compute shortest paths between all tourist spots in a city.</p>
+    <p><strong>Implementation:</strong></p>
+    <ul>
+        <li><strong>Input:</strong> A graph representing tourist spots as nodes and roads with travel times as edges.</li>
+        <li><strong>Output:</strong> A matrix with shortest travel times between all pairs of spots.</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <pre><code>Areas: Central Plaza, Lakeview Park, Hilltop Observatory, Historic Market.
 Result:  
 Shortest Path Matrix:
 Central Plaza → Lakeview Park: 15 mins  
 Lakeview Park → Hilltop Observatory: 20 mins  
 Central Plaza → Hilltop Observatory: 30 mins  
 ...</code></pre>
-        </div>
 
-        <div class="algorithm-section">
-            <h3>3. Predicting Visitor Trends</h3>
-            <p><strong>Problem:</strong> Accurate prediction of tourist footfall helps in preparing for peak seasons.</p>
-            <p><strong>Solution:</strong> Use <strong>Dijkstra's Algorithm</strong> to find the most optimal routes that visitors take, which can be used to predict where congestion or high footfall may occur.</p>
+    <button onclick="toggleCode('floydWarshallCode')">Show Full Code</button>
+    <div id="floydWarshallCode" style="display:none;">
+        <pre><code>
+#include <iostream>
+#include <vector>
+#include <climits>
 
-            <h4>Algorithm: Dijkstra's Algorithm</h4>
-            <p><strong>Purpose:</strong> Find the shortest path in terms of travel time or distance from one location to another, helping to predict the flow of visitors between popular spots.</p>
-            <p><strong>Concept:</strong> Dijkstra’s algorithm calculates the shortest path from a starting node (tourist spot) to all other nodes (other spots), helping in understanding which routes will see the most visitors. By examining the number of visitors traveling along each route, the algorithm can predict footfall at different locations.</p>
-            <p><strong>Implementation:</strong></p>
-            <ul>
-                <li><strong>Input:</strong> A graph of tourist spots with weighted edges representing the time or distance between spots.</li>
-                <li><strong>Output:</strong> Shortest paths from one spot to all others.</li>
-            </ul>
-            <p><strong>Example:</strong></p>
-            <pre><code>Areas: Central Plaza → Hilltop Observatory → Lakeview Park.
+using namespace std;
+
+#define INF INT_MAX
+
+void floydWarshall(vector<vector<int>>& dist, int n) {
+    for (int k = 0; k < n; k++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dist[i][k] != INF && dist[k][j] != INF) {
+                    dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j]);
+                }
+            }
+        }
+    }
+}
+
+int main() {
+    int n = 4; // Number of spots
+    vector<vector<int>> dist(n, vector<int>(n, INF));
+    
+    // Setting up the graph (distances between spots)
+    dist[0][1] = 15; dist[1][0] = 15;
+    dist[1][2] = 20; dist[2][1] = 20;
+    dist[0][2] = 30; dist[2][0] = 30;
+    dist[0][3] = 25; dist[3][0] = 25;
+    dist[3][2] = 10; dist[2][3] = 10;
+    
+    floydWarshall(dist, n);
+    
+    cout << "Shortest Path Matrix:" << endl;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (dist[i][j] == INF) cout << "INF ";
+            else cout << dist[i][j] << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+        </code></pre>
+    </div>
+</div>
+
+<div class="algorithm-section">
+    <h3>3. Predicting Visitor Trends</h3>
+    <p><strong>Problem:</strong> Accurate prediction of tourist footfall helps in preparing for peak seasons.</p>
+    <p><strong>Solution:</strong> Use <strong>Dijkstra's Algorithm</strong> to find the most optimal routes that visitors take, which can be used to predict where congestion or high footfall may occur.</p>
+
+    <h4>Algorithm: Dijkstra's Algorithm</h4>
+    <p><strong>Purpose:</strong> Find the shortest path in terms of travel time or distance from one location to another, helping to predict the flow of visitors between popular spots.</p>
+    <p><strong>Concept:</strong> Dijkstra’s algorithm calculates the shortest path from a starting node (tourist spot) to all other nodes (other spots), helping in understanding which routes will see the most visitors. By examining the number of visitors traveling along each route, the algorithm can predict footfall at different locations.</p>
+    <p><strong>Implementation:</strong></p>
+    <ul>
+        <li><strong>Input:</strong> A graph of tourist spots with weighted edges representing the time or distance between spots.</li>
+        <li><strong>Output:</strong> Shortest paths from one spot to all others.</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <pre><code>Areas: Central Plaza → Hilltop Observatory → Lakeview Park.
 Result: Dijkstra’s algorithm finds the fastest paths, which can predict that Central Plaza will see heavy traffic because it's connected to several key locations.</code></pre>
-        </div>
 
-        <div class="algorithm-section">
-            <h3>4. Reducing Congestion Using Dynamic Routing</h3>
-            <p><strong>Problem:</strong> Popular spots often face traffic congestion, frustrating tourists and locals.</p>
-            <p><strong>Solution:</strong> Implement <strong>Bellman-Ford Algorithm</strong> to reroute tourists dynamically.</p>
+    <button onclick="toggleCode('dijkstraCode')">Show Full Code</button>
+    <div id="dijkstraCode" style="display:none;">
+        <pre><code>
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <climits>
 
-            <h4>Algorithm: Bellman-Ford</h4>
-            <p><strong>Purpose:</strong> Identify shortest paths dynamically, even with real-time traffic changes.</p>
-            <p><strong>Implementation:</strong></p>
-            <ul>
-                <li><strong>Input:</strong> Real-time traffic data and travel time updates for roads.</li>
-                <li><strong>Output:</strong> Adjusted routes to reduce congestion.</li>
-            </ul>
-            <p><strong>Example:</strong></p>
-            <pre><code>Congestion detected on the main road to Central Plaza.
+using namespace std;
+
+void dijkstra(const vector<vector<pair<int, int>>>& graph, int start, vector<int>& dist) {
+    dist[start] = 0;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, start});
+    
+    while (!pq.empty()) {
+        int u = pq.top().second;
+        int d = pq.top().first;
+        pq.pop();
+        
+        if (d > dist[u]) continue;
+        
+        for (auto& edge : graph[u]) {
+            int v = edge.first;
+            int weight = edge.second;
+            if (dist[u] + weight < dist[v]) {
+                dist[v] = dist[u] + weight;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+}
+
+int main() {
+    int n = 4; // Number of tourist spots
+    vector<vector<pair<int, int>>> graph(n);
+    
+    // Add edges (connections between spots and travel time)
+    graph[0].push_back({1, 15}); graph[1].push_back({0, 15});
+    graph[1].push_back({2, 20}); graph[2].push_back({1, 20});
+    graph[0].push_back({2, 30}); graph[2].push_back({0, 30});
+    graph[0].push_back({3, 25}); graph[3].push_back({0, 25});
+    graph[3].push_back({2, 10}); graph[2].push_back({3, 10});
+    
+    vector<int> dist(n, INT_MAX);
+    dijkstra(graph, 0, dist); // Start from Central Plaza
+    
+    cout << "Shortest Paths from Central Plaza:" << endl;
+    for (int i = 0; i < n; i++) {
+        if (dist[i] == INT_MAX) cout << "INF ";
+        else cout << dist[i] << " ";
+    }
+    return 0;
+}
+        </code></pre>
+    </div>
+</div>
+
+<div class="algorithm-section">
+    <h3>4. Reducing Congestion Using Dynamic Routing</h3>
+    <p><strong>Problem:</strong> Popular spots often face traffic congestion, frustrating tourists and locals.</p>
+    <p><strong>Solution:</strong> Implement <strong>Bellman-Ford Algorithm</strong> to reroute tourists dynamically.</p>
+
+    <h4>Algorithm: Bellman-Ford</h4>
+    <p><strong>Purpose:</strong> Identify shortest paths dynamically, even with real-time traffic changes.</p>
+    <p><strong>Implementation:</strong></p>
+    <ul>
+        <li><strong>Input:</strong> Real-time traffic data and travel time updates for roads.</li>
+        <li><strong>Output:</strong> Adjusted routes to reduce congestion.</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <pre><code>Congestion detected on the main road to Central Plaza.
 Result: Tourists rerouted via secondary roads to reach the spot.</code></pre>
-        </div>
 
-        <div class="algorithm-section">
-            <h3>5. Dynamic Pricing for Seasonal Demand</h3>
-            <p><strong>Problem:</strong> Tourism revenue can be maximized with dynamic pricing strategies.</p>
-            <p><strong>Solution:</strong> Use <strong>Breadth-First Search (BFS)</strong> to identify and price tourist spots based on demand and distance from popular tourist areas.</p>
+    <button onclick="toggleCode('bellmanFordCode')">Show Full Code</button>
+    <div id="bellmanFordCode" style="display:none;">
+        <pre><code>
+#include <iostream>
+#include <vector>
+#include <climits>
 
-            <h4>Algorithm: Breadth-First Search (BFS)</h4>
-            <p><strong>Purpose:</strong> Explore all possible tourist spots by visiting neighboring nodes first, helping to identify which spots are the most connected and, therefore, most likely to experience higher footfall. The algorithm can then be used for dynamic pricing by identifying the spots with the highest demand and adjusting prices accordingly.</p>
-            <p><strong>Concept:</strong> BFS explores all tourist spots level by level, starting from the most popular spots and expanding outward. This can be used to identify tourist spots that may see increasing demand as people visit nearby spots.</p>
-            <p><strong>Implementation:</strong></p>
-            <ul>
-                <li><strong>Input:</strong> A graph of tourist spots and their connections (i.e., which spots are connected to each other).</li>
-                <li><strong>Output:</strong> Identifying tourist spots that are likely to be visited based on proximity to other spots.</li>
-            </ul>
-            <p><strong>Example:</strong></p>
-            <pre><code>Area: Lakeview Park (central location) → Nearby attractions (Historic Market, Hilltop Observatory).
+using namespace std;
+
+void bellmanFord(const vector<vector<pair<int, int>>>& graph, int n, int start) {
+    vector<int> dist(n, INT_MAX);
+    dist[start] = 0;
+    
+    for (int i = 0; i < n - 1; i++) {
+        for (int u = 0; u < n; u++) {
+            for (auto& edge : graph[u]) {
+                int v = edge.first;
+                int weight = edge.second;
+                if (dist[u] != INT_MAX && dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                }
+            }
+        }
+    }
+    
+    cout << "Shortest Paths from Central Plaza:" << endl;
+    for (int i = 0; i < n; i++) {
+        if (dist[i] == INT_MAX) cout << "INF ";
+        else cout << dist[i] << " ";
+    }
+}
+
+int main() {
+    int n = 4; // Number of tourist spots
+    vector<vector<pair<int, int>>> graph(n);
+    
+    // Add edges (connections between spots and travel time)
+    graph[0].push_back({1, 15}); graph[1].push_back({0, 15});
+    graph[1].push_back({2, 20}); graph[2].push_back({1, 20});
+    graph[0].push_back({2, 30}); graph[2].push_back({0, 30});
+    graph[0].push_back({3, 25}); graph[3].push_back({0, 25});
+    graph[3].push_back({2, 10}); graph[2].push_back({3, 10});
+    
+    bellmanFord(graph, n, 0); // Start from Central Plaza
+    return 0;
+}
+        </code></pre>
+    </div>
+</div>
+
+<div class="algorithm-section">
+    <h3>5. Dynamic Pricing for Seasonal Demand</h3>
+    <p><strong>Problem:</strong> Tourism revenue can be maximized with dynamic pricing strategies.</p>
+    <p><strong>Solution:</strong> Use <strong>Breadth-First Search (BFS)</strong> to identify and price tourist spots based on demand and distance from popular tourist areas.</p>
+
+    <h4>Algorithm: Breadth-First Search (BFS)</h4>
+    <p><strong>Purpose:</strong> Explore all possible tourist spots by visiting neighboring nodes first, helping to identify which spots are the most connected and, therefore, most likely to experience higher footfall. The algorithm can then be used for dynamic pricing by identifying the spots with the highest demand and adjusting prices accordingly.</p>
+    <p><strong>Concept:</strong> BFS explores all tourist spots level by level, starting from the most popular spots and expanding outward. This can be used to identify tourist spots that may see increasing demand as people visit nearby spots.</p>
+    <p><strong>Implementation:</strong></p>
+    <ul>
+        <li><strong>Input:</strong> A graph of tourist spots and their connections (i.e., which spots are connected to each other).</li>
+        <li><strong>Output:</strong> Identifying tourist spots that are likely to be visited based on proximity to other spots.</li>
+    </ul>
+    <p><strong>Example:</strong></p>
+    <pre><code>Area: Lakeview Park (central location) → Nearby attractions (Historic Market, Hilltop Observatory).
 Result: Dynamic pricing adjusts as more tourists visit neighboring spots.</code></pre>
-        </div>
 
-    </div>
+    <button onclick="toggleCode('bfsCode')">Show Full Code</button>
+    <div id="bfsCode" style="display:none;">
+        <pre><code>
+#include <iostream>
+#include <vector>
+#include <queue>
 
-    <div class="content">
-        <h2>Conclusion</h2>
-        <p>By employing algorithms such as <strong>Merge Sort</strong> for ranking, <strong>Floyd-Warshall</strong> for route optimization, <strong>Dijkstra's Algorithm</strong> for predicting visitor trends, and <strong>Breadth-First Search (BFS)</strong> for dynamic pricing, cities can design smarter tourism systems. These data-driven approaches enhance efficiency, support sustainability, and improve the visitor experience.</p>
+using namespace std;
+
+void bfs(const vector<vector<int>>& graph, int start) {
+    vector<bool> visited(graph.size(), false);
+    queue<int> q;
+    
+    visited[start] = true;
+    q.push(start);
+    
+    while (!q.empty()) {
+        int spot = q.front();
+        q.pop();
+        
+        cout << "Visiting Spot " << spot << endl;
+        
+        for (int neighbor : graph[spot]) {
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                q.push(neighbor);
+            }
+        }
+    }
+}
+
+int main() {
+    int n = 4; // Number of spots
+    vector<vector<int>> graph(n);
+    
+    // Add connections (edges between spots)
+    graph[0].push_back(1); graph[1].push_back(0);
+    graph[0].push_back(2); graph[2].push_back(0);
+    graph[1].push_back(3); graph[3].push_back(1);
+    
+    bfs(graph, 0); // Start from Lakeview Park
+    return 0;
+}
+        </code></pre>
     </div>
+</div>
+
+<div class="content">
+    <h2>Conclusion</h2>
+    <p>By employing algorithms such as <strong>Merge Sort</strong> for ranking, <strong>Floyd-Warshall</strong> for route optimization, <strong>Dijkstra's Algorithm</strong> for predicting visitor trends, and <strong>Breadth-First Search (BFS)</strong> for dynamic pricing, cities can design smarter tourism systems. These data-driven approaches enhance efficiency, support sustainability, and improve the visitor experience.</p>
+</div>
+
+<script>
+    function toggleCode(id) {
+        var codeDiv = document.getElementById(id);
+        if (codeDiv.style.display === "none") {
+            codeDiv.style.display = "block";
+        } else {
+            codeDiv.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>
