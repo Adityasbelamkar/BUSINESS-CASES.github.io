@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -580,7 +581,6 @@ int main() {
                 <li><strong>Indicator 11.5.2:</strong> Direct economic loss attributed to disasters in relation to global domestic product (GDP).</li>
             </ul>
         </div>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -593,16 +593,22 @@ int main() {
             line-height: 1.6;
             margin: 0;
             padding: 20px;
-            background-color: #f4f6f9;
+            background-color: #f4f4f9;
+            animation: fadeIn 2s ease-in;
+        }
+        h1, h2 {
             color: #333;
         }
-        h1, h2, h3 {
-            color: #2c3e50;
+        h1 {
+            background-color: #ffefd5;
+            padding: 15px;
+            animation: slideInFromTop 1.5s ease-out;
         }
         table {
             width: 100%;
             margin: 20px 0;
             border-collapse: collapse;
+            animation: zoomIn 1s ease-in-out;
         }
         table, th, td {
             border: 1px solid #ddd;
@@ -612,49 +618,44 @@ int main() {
             text-align: left;
         }
         th {
-            background-color: #3498db;
+            background-color: #4CAF50;
             color: white;
         }
         .section {
             margin-bottom: 40px;
-        }
-        .collapsible {
-            background-color: #3498db;
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            outline: none;
-            font-size: 16px;
-            transition: background-color 0.3s ease;
-        }
-        .collapsible:hover {
-            background-color: #2980b9;
-        }
-        .content {
-            padding: 0 18px;
-            display: none;
-            overflow: hidden;
-            background-color: #ecf0f1;
-            border: 1px solid #ddd;
-            margin-top: 5px;
-        }
-        pre {
-            background: #2c3e50;
-            color: #ecf0f1;
-            padding: 15px;
-            overflow-x: auto;
-            border-radius: 5px;
-            font-size: 14px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
-        .content {
-            animation: fadeIn 0.5s;
+        @keyframes slideInFromTop {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
     </style>
 </head>
@@ -668,444 +669,102 @@ int main() {
 
         <h3>AVL Tree</h3>
         <p><strong>Purpose:</strong> Maintaining a balanced dataset for disaster-related information like shelter availability or hospital capacity.</p>
-        <p><strong>Real-world Example:</strong> AVL trees can be used in emergency hotlines to keep call queues balanced and ensure timely responses.</p>
-        <button class="collapsible">Show AVL Tree Code</button>
-        <div class="content">
-            <pre>
-#include <iostream>
-using namespace std;
-
-struct Node {
-    int key;
-    Node* left;
-    Node* right;
-    int height;
-};
-
-int height(Node* N) {
-    return N == nullptr ? 0 : N->height;
-}
-
-Node* newNode(int key) {
-    Node* node = new Node();
-    node->key = key;
-    node->left = node->right = nullptr;
-    node->height = 1;
-    return node;
-}
-
-Node* rotateRight(Node* y) {
-    Node* x = y->left;
-    Node* T2 = x->right;
-    x->right = y;
-    y->left = T2;
-    y->height = max(height(y->left), height(y->right)) + 1;
-    x->height = max(height(x->left), height(x->right)) + 1;
-    return x;
-}
-
-Node* rotateLeft(Node* x) {
-    Node* y = x->right;
-    Node* T2 = y->left;
-    y->left = x;
-    x->right = T2;
-    x->height = max(height(x->left), height(x->right)) + 1;
-    y->height = max(height(y->left), height(y->right)) + 1;
-    return y;
-}
-
-int getBalance(Node* N) {
-    return N == nullptr ? 0 : height(N->left) - height(N->right);
-}
-
-Node* insert(Node* node, int key) {
-    if (node == nullptr) return newNode(key);
-    if (key < node->key) node->left = insert(node->left, key);
-    else if (key > node->key) node->right = insert(node->right, key);
-    else return node;
-    node->height = 1 + max(height(node->left), height(node->right));
-    int balance = getBalance(node);
-    if (balance > 1 && key < node->left->key) return rotateRight(node);
-    if (balance < -1 && key > node->right->key) return rotateLeft(node);
-    if (balance > 1 && key > node->left->key) {
-        node->left = rotateLeft(node->left);
-        return rotateRight(node);
-    }
-    if (balance < -1 && key < node->right->key) {
-        node->right = rotateRight(node->right);
-        return rotateLeft(node);
-    }
-    return node;
-}
-
-void preOrder(Node* root) {
-    if (root != nullptr) {
-        cout << root->key << " ";
-        preOrder(root->left);
-        preOrder(root->right);
-    }
-}
-
-int main() {
-    Node* root = nullptr;
-    root = insert(root, 10);
-    root = insert(root, 20);
-    root = insert(root, 30);
-    root = insert(root, 40);
-    root = insert(root, 50);
-    root = insert(root, 25);
-    cout << "Preorder traversal of the AVL tree is:\n";
-    preOrder(root);
-    return 0;
-}
-            </pre>
-        </div>
+        <p><strong>Application:</strong> The AVL tree can be used to organize and query large datasets related to disaster scenarios efficiently. Its self-balancing property ensures logarithmic time complexity for insertion, deletion, and search operations, making it ideal for dynamic disaster environments.</p>
+        <p><strong>Real-Time Data Example:</strong> Storing information about shelters and hospital capacities, with updates about availability or capacity changes being automatically balanced within the tree structure.</p>
+        <p><strong>Example:</strong> During a hurricane, AVL trees can manage a database of shelters, allowing authorities to quickly find the nearest shelter with available capacity.</p>
 
         <h3>Sorting Techniques</h3>
         <p><strong>Purpose:</strong> Efficiently sorting disaster-related data for prioritization, such as ranking affected areas by severity or organizing resources for distribution.</p>
-        <button class="collapsible">Show Sorting Techniques Code</button>
-        <div class="content">
-            <pre>
-#include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-void merge(vector<int>& arr, int l, int m, int r) {
-    int n1 = m - l + 1;
-    int n2 = r - m;
-    vector<int> L(n1), R(n2);
-    for (int i = 0; i < n1; i++) L[i] = arr[l + i];
-    for (int j = 0; j < n2; j++) R[j] = arr[m + 1 + j];
-    int i = 0, j = 0, k = l;
-    while (i < n1 && j < n2) {
-        if (L[i] <= R[j]) arr[k++] = L[i++];
-        else arr[k++] = R[j++];
-    }
-    while (i < n1) arr[k++] = L[i++];
-    while (j < n2) arr[k++] = R[j++];
-}
-
-void mergeSort(vector<int>& arr, int l, int r) {
-    if (l >= r) return;
-    int m = l + (r - l) / 2;
-    mergeSort(arr, l, m);
-    mergeSort(arr, m + 1, r);
-    merge(arr, l, m, r);
-}
-
-int main() {
-    vector<int> data = {38, 27, 43, 3, 9, 82, 10};
-    cout << "Original array:\n";
-    for (int num : data) cout << num << " ";
-    cout << endl;
-    mergeSort(data, 0, data.size() - 1);
-    cout << "Sorted array:\n";
-    for (int num : data) cout << num << " ";
-    cout << endl;
-    return 0;
-}
-            </pre>
-        </div>
+        <p><strong>Application:</strong> Sorting techniques like QuickSort or MergeSort can organize data based on key metrics, such as severity of impact, proximity to resources, or urgency of response. Efficient sorting helps decision-makers prioritize their actions in a logical order.</p>
+        <p><strong>Real-Time Data Example:</strong> Sorting regions based on the level of damage or sorting relief resources by availability and type (e.g., medical supplies, food).</p>
+        <p><strong>Example:</strong> After an earthquake, sorting techniques can prioritize areas with the highest reported damage for immediate rescue and relief operations.</p>
 
         <h3>Skip List</h3>
         <p><strong>Purpose:</strong> Efficient searching and updating of real-time disaster data, such as the status of roadblocks, shelters, or hospital capacities.</p>
-        <button class="collapsible">Show Skip List Code</button>
-        <div class="content">
-            <pre>
-#include <iostream>
-#include <cstdlib>
-#include <cmath>
-#include <ctime>
-using namespace std;
+        <p><strong>Application:</strong> A skip list can be used for fast searching and updating of information regarding the current state of different locations in the city. It provides logarithmic time complexity for search, insertion, and deletion operations, making it suitable for dynamic environments like disaster response scenarios where data is constantly changing.</p>
+        <p><strong>Real-Time Data Example:</strong> Real-time updates about road closures, shelter availability, or hospital capacity can be stored and managed in a skip list. This allows decision-makers to quickly find the nearest available shelter or the most accessible route to a hospital.</p>
+        <p><strong>Example:</strong> During an evacuation due to a wildfire, a skip list can manage real-time updates on road conditions and shelter availability, allowing the authorities to quickly direct evacuees to the nearest available safe location.</p>
 
-struct Node {
-    int key;
-    Node **forward;
-    Node(int key, int level) {
-        this->key = key;
-        forward = new Node*[level + 1];
-        for (int i = 0; i <= level; i++)
-            forward[i] = nullptr;
-    }
-};
+        <h3>Breadth-First Search (BFS)</h3>
+        <p><strong>Purpose:</strong> Identifying and reaching safe zones (e.g., shelters or evacuation points) in the shortest time possible.</p>
+        <p><strong>Application:</strong> BFS can be used to explore the graph layer by layer, starting from a source (e.g., an evacuation point) and finding the shortest paths to various destinations (e.g., safe zones). BFS is ideal for scenarios where the goal is to reach a target in the least number of steps, making it particularly useful for evacuation routing and search operations.</p>
+        <p><strong>Real-Time Data Example:</strong> Use real-time maps of the city and dynamic data on road conditions to implement BFS and guide people to the closest safe zones in the fastest possible time.</p>
+        <p><strong>Example:</strong> After a flood or earthquake, BFS can be used to guide people from affected buildings to nearby safe zones or shelters, ensuring they reach safety in the shortest time.</p>
 
-class SkipList {
-    int maxLevel;
-    float p;
-    int level;
-    Node *header;
+        <h3>Depth-First Search (DFS)</h3>
+        <p><strong>Purpose:</strong> Exploring all accessible areas for rescue operations or damage assessment.</p>
+        <p><strong>Application:</strong> DFS is useful for exploring all possible routes or paths in a city that may be blocked or inaccessible. In situations where resources or search teams need to explore a region (e.g., urban search-and-rescue missions), DFS can help exhaustively check for survivors or assess damage.</p>
+        <p><strong>Real-Time Data Example:</strong> Use city mapping and sensor data (e.g., GPS tracking of rescue teams) to guide DFS in exploring areas that need immediate attention.</p>
+        <p><strong>Example:</strong> During the 2010 Chilean earthquake, DFS could have been applied in urban search-and-rescue operations to systematically explore buildings and affected regions for survivors.</p>
 
-public:
-    SkipList(int maxLevel, float p) : maxLevel(maxLevel), p(p), level(0) {
-        header = new Node(-1, maxLevel);
-    }
+        <h3>Knuth-Morris-Pratt (KMP) Algorithm</h3>
+        <p><strong>Purpose:</strong> Efficiently searching and processing emergency alerts, messages, and disaster-related communications.</p>
+        <p><strong>Application:</strong> The KMP algorithm is efficient for searching for specific patterns in a large corpus of text, such as emergency messaging or disaster-related communications. In the context of disaster response, KMP can be used to quickly search for key patterns in emergency alerts (e.g., "flood warning", "evacuation order", "power outage").</p>
+        <p><strong>Real-Time Data Example:</strong> Monitor public channels (e.g., emergency SMS, social media, or public broadcasts) and use the KMP algorithm to extract critical messages related to the disaster.</p>
+        <p><strong>Example:</strong> In the event of a hurricane, KMP can be used to quickly filter out critical evacuation or safety-related messages from large streams of emergency communication, ensuring that relevant information reaches decision-makers and affected citizens.</p>
+    </div>
 
-    int randomLevel() {
-        float r = (float)rand() / RAND_MAX;
-        int lvl = 0;
-        while (r < p && lvl < maxLevel) {
-            lvl++;
-            r = (float)rand() / RAND_MAX;
-        }
-        return lvl;
-    }
+    <div class="section">
+        <h2>Summary of Algorithms and Data Structures</h2>
+        <p>Below is a table summarizing the algorithms, their purposes, applications, and the data used for each scenario:</p>
 
-    void insertElement(int key) {
-        Node *current = header;
-        Node *update[maxLevel + 1];
-        for (int i = level; i >= 0; i--) {
-            while (current->forward[i] != nullptr && current->forward[i]->key < key)
-                current = current->forward[i];
-            update[i] = current;
-        }
-        current = current->forward[0];
-        if (current == nullptr || current->key != key) {
-            int rlevel = randomLevel();
-            if (rlevel > level) {
-                for (int i = level + 1; i < rlevel + 1; i++)
-                    update[i] = header;
-                level = rlevel;
-            }
-            Node *newNode = new Node(key, rlevel);
-            for (int i = 0; i <= rlevel; i++) {
-                newNode->forward[i] = update[i]->forward[i];
-                update[i]->forward[i] = newNode;
-            }
-        }
-    }
+        <table>
+            <thead>
+                <tr>
+                    <th>Algorithm/Data Structure</th>
+                    <th>Challenge</th>
+                    <th>Use Case</th>
+                    <th>Data Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>AVL Tree</td>
+                    <td>Maintaining balanced disaster-related data</td>
+                    <td>Efficiently querying shelter or hospital availability</td>
+                    <td>Real-time shelter and hospital capacity updates</td>
+                </tr>
+                <tr>
+                    <td>Sorting Techniques</td>
+                    <td>Prioritizing disaster-affected areas</td>
+                    <td>Ranking regions by severity of impact</td>
+                    <td>Data on severity, proximity, urgency</td>
+                </tr>
+                <tr>
+                    <td>Skip List</td>
+                    <td>Efficient searching and updating disaster data</td>
+                    <td>Searching and updating real-time disaster data (e.g., shelter status)</td>
+                    <td>Real-time updates on road closures, shelter availability</td>
+                </tr>
+                <tr>
+                    <td>BFS</td>
+                    <td>Safe zone identification</td>
+                    <td>Finding shortest paths to safe zones</td>
+                    <td>Real-time evacuation maps, road conditions</td>
+                </tr>
+                <tr>
+                    <td>DFS</td>
+                    <td>Exploration for rescue operations</td>
+                    <td>Exploring affected areas for survivors or damage assessment</td>
+                    <td>GPS tracking of rescue teams, city maps</td>
+                </tr>
+                <tr>
+                    <td>KMP</td>
+                    <td>Emergency message pattern matching</td>
+                    <td>Searching for critical disaster-related messages</td>
+                    <td>Emergency alerts, public communication data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
-    void displayList() {
-        cout << "\nSkip List:\n";
-        for (int i = 0; i <= level; i++) {
-            Node *current = header->forward[i];
-            cout << "Level " << i << ": ";
-            while (current != nullptr) {
-                cout << current->key << " ";
-                current = current->forward[i];
-            }
-            cout << endl;
-        }
-    }
-};
-
-int main() {
-    srand(time(0));
-    SkipList list(3, 0.5);
-    list.insertElement(3);
-    list.insertElement(6);
-    list.insertElement(7);
-    list.insertElement(9);
-    list.insertElement(12);
-    list.insertElement(19);
-    list.displayList();
-    return 0;
-}
-            </pre>
+    <div class="section">
+        <h2>Best and Most Accurate Algorithm</h2>
+        <p><strong>For maintaining dynamic data:</strong> AVL trees are ideal due to their balanced structure and efficient query capabilities.</p>
+        <p><strong>For prioritization tasks:</strong> Sorting techniques provide reliable methods for ranking and organizing disaster-related data.</p>
+        <p><strong>For data updates and search:</strong> Skip lists provide fast searching and real-time updates, ensuring efficiency in a rapidly changing disaster environment.</p>
+    </div>
         </div>
-       <h3>Breadth-First Search (BFS)</h3>
-    <p><strong>Purpose:</strong> Identifying and reaching safe zones (e.g., shelters or evacuation points) in the shortest time possible.</p>
-    <p><strong>Application:</strong> BFS can be used to explore the graph layer by layer, starting from a source (e.g., an evacuation point) and finding the shortest paths to various destinations (e.g., safe zones). BFS is ideal for scenarios where the goal is to reach a target in the least number of steps, making it particularly useful for evacuation routing and search operations.</p>
-    <p><strong>Real-Time Data Example:</strong> Use real-time maps of the city and dynamic data on road conditions to implement BFS and guide people to the closest safe zones in the fastest possible time.</p>
-    <p><strong>Example:</strong> After a flood or earthquake, BFS can be used to guide people from affected buildings to nearby safe zones or shelters, ensuring they reach safety in the shortest time.</p>
-
-    <button class="collapsible">Show BFS Code</button>
-    <div class="content">
-        <pre>
-#include &lt;iostream&gt;
-#include &lt;list&gt;
-#include &lt;queue&gt;
-using namespace std;
-
-class Graph {
-    int V;
-    list&lt;int&gt; *adj;
-
-public:
-    Graph(int V) {
-        this-&gt;V = V;
-        adj = new list&lt;int&gt;[V];
-    }
-
-    void addEdge(int v, int w) {
-        adj[v].push_back(w);
-    }
-
-    void BFS(int s) {
-        vector&lt;bool&gt; visited(V, false);
-        queue&lt;int&gt; queue;
-        visited[s] = true;
-        queue.push(s);
-
-        while (!queue.empty()) {
-            s = queue.front();
-            cout &lt;&lt; s &lt;&lt; " ";
-            queue.pop();
-            for (auto i = adj[s].begin(); i != adj[s].end(); ++i) {
-                if (!visited[*i]) {
-                    visited[*i] = true;
-                    queue.push(*i);
-                }
-            }
-        }
-    }
-};
-
-int main() {
-    Graph g(4);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(2, 0);
-    g.addEdge(2, 3);
-    g.addEdge(3, 3);
-
-    cout &lt;&lt; "BFS starting from vertex 2: \n";
-    g.BFS(2);
-    return 0;
-}
-        </pre>
-    </div>
-
-    <h3>Depth-First Search (DFS)</h3>
-    <p><strong>Purpose:</strong> Exploring all accessible areas for rescue operations or damage assessment.</p>
-    <p><strong>Application:</strong> DFS is useful for exploring all possible routes or paths in a city that may be blocked or inaccessible. In situations where resources or search teams need to explore a region (e.g., urban search-and-rescue missions), DFS can help exhaustively check for survivors or assess damage.</p>
-    <p><strong>Real-Time Data Example:</strong> Use city mapping and sensor data (e.g., GPS tracking of rescue teams) to guide DFS in exploring areas that need immediate attention.</p>
-    <p><strong>Example:</strong> During the 2010 Chilean earthquake, DFS could have been applied in urban search-and-rescue operations to systematically explore buildings and affected regions for survivors.</p>
-
-    <button class="collapsible">Show DFS Code</button>
-    <div class="content">
-        <pre>
-#include &lt;iostream&gt;
-#include &lt;list&gt;
-using namespace std;
-
-class Graph {
-    int V;
-    list&lt;int&gt; *adj;
-
-    void DFSUtil(int v, vector&lt;bool&gt; &amp;visited) {
-        visited[v] = true;
-        cout &lt;&lt; v &lt;&lt; " ";
-        for (auto i = adj[v].begin(); i != adj[v].end(); ++i)
-            if (!visited[*i])
-                DFSUtil(*i, visited);
-    }
-
-public:
-    Graph(int V) {
-        this-&gt;V = V;
-        adj = new list&lt;int&gt;[V];
-    }
-
-    void addEdge(int v, int w) {
-        adj[v].push_back(w);
-    }
-
-    void DFS(int v) {
-        vector&lt;bool&gt; visited(V, false);
-        DFSUtil(v, visited);
-    }
-};
-
-int main() {
-    Graph g(4);
-    g.addEdge(0, 1);
-    g.addEdge(0, 2);
-    g.addEdge(1, 2);
-    g.addEdge(2, 0);
-    g.addEdge(2, 3);
-    g.addEdge(3, 3);
-
-    cout &lt;&lt; "DFS starting from vertex 2: \n";
-    g.DFS(2);
-    return 0;
-}
-        </pre>
-    </div>
-
-    <h3>Knuth-Morris-Pratt (KMP) Algorithm</h3>
-    <p><strong>Purpose:</strong> Efficiently searching and processing emergency alerts, messages, and disaster-related communications.</p>
-    <p><strong>Application:</strong> The KMP algorithm is efficient for searching for specific patterns in a large corpus of text, such as emergency messaging or disaster-related communications. In the context of disaster response, KMP can be used to quickly search for key patterns in emergency alerts (e.g., "flood warning", "evacuation order", "power outage").</p>
-    <p><strong>Real-Time Data Example:</strong> Monitor public channels (e.g., emergency SMS, social media, or public broadcasts) and use the KMP algorithm to extract critical messages related to the disaster.</p>
-    <p><strong>Example:</strong> In the event of a hurricane, KMP can be used to quickly filter out critical evacuation or safety-related messages from large streams of emergency communication, ensuring that relevant information reaches decision-makers and affected citizens.</p>
-
-    <button class="collapsible">Show KMP Algorithm Code</button>
-    <div class="content">
-        <pre>
-#include &lt;iostream&gt;
-#include &lt;vector&gt;
-using namespace std;
-
-void computeLPSArray(string pat, int M, vector&lt;int&gt; &amp;lps) {
-    int length = 0;
-    lps[0] = 0;
-    int i = 1;
-    while (i &lt; M) {
-        if (pat[i] == pat[length]) {
-            length++;
-            lps[i] = length;
-            i++;
-        } else {
-            if (length != 0) {
-                length = lps[length - 1];
-            } else {
-                lps[i] = 0;
-                i++;
-            }
-        }
-    }
-}
-
-void KMPSearch(string pat, string txt) {
-    int M = pat.length();
-    int N = txt.length();
-    vector&lt;int&gt; lps(M);
-    computeLPSArray(pat, M, lps);
-
-    int i = 0, j = 0;
-    while (i &lt; N) {
-        if (pat[j] == txt[i]) {
-            j++;
-            i++;
-        }
-        if (j == M) {
-            cout &lt;&lt; "Found pattern at index " &lt;&lt; i - j &lt;&lt; endl;
-            j = lps[j - 1];
-        } else if (i &lt; N && pat[j] != txt[i]) {
-            if (j != 0)
-                j = lps[j - 1];
-            else
-                i = i + 1;
-        }
-    }
-}
-
-int main() {
-    string txt = "ABABDABACDABABCABAB";
-    string pat = "ABABCABAB";
-    KMPSearch(pat, txt);
-    return 0;
-}
-        </pre>
-    </div>
-
-    <script>
-        const collapsibles = document.querySelectorAll(".collapsible");
-        collapsibles.forEach(button => {
-            button.addEventListener("click", function () {
-                this.classList.toggle("active");
-                const content = this.nextElementSibling;
-                if (content.style.display === "block") {
-                    content.style.display = "none";
-                } else {
-                    content.style.display = "block";
-                }
-            });
-        });
-    </script>        
-           
-       
     </div>
 
     <h1 onclick="toggleDetails('tourismDetails')">Efficient Management of Tourism</h1>
